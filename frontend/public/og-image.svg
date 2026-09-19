@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bgGlow" cx="65%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#161e38" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#0d121f" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#080b10" stop-opacity="1"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#1c253b" stroke-width="0.75" stroke-opacity="0.5"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#080b10"/>
+  <rect width="1200" height="630" fill="url(#bgGlow)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Brand badge -->
+  <g transform="translate(80, 72)">
+    <rect width="44" height="44" rx="10" fill="#0e1424" stroke="#25324d" stroke-width="1.5"/>
+    <g transform="translate(6, 6) scale(1)">
+      <path d="M6 25C6 13 13 6 26 6c0 13-7 20-20 19Z" fill="none" stroke="#a9baff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 25 19 12" fill="none" stroke="#a9baff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M4 4l24 24" fill="none" stroke="#ff7373" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <text x="56" y="28" fill="#e9edfc" font-family="'Fraunces', serif, Georgia" font-size="22" font-weight="600" letter-spacing="-0.02em">
+      Not <tspan font-style="italic" fill="#a9baff">from</tspan> here
+    </text>
+    <rect x="220" y="8" width="130" height="26" rx="13" fill="#141c2e" stroke="#2c3b59" stroke-width="1"/>
+    <circle cx="232" cy="21" r="3.5" fill="#3dd68c"/>
+    <text x="242" y="25" fill="#93a4c8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="0.08em">DEMO SENTINEL</text>
+  </g>
+
+  <!-- Left Content Column -->
+  <g transform="translate(80, 180)">
+    <!-- Pill tracker -->
+    <rect width="360" height="30" rx="6" fill="#111827" stroke="#253147" stroke-width="1"/>
+    <text x="14" y="19" fill="#8297bd" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="0.1em">
+      SOUTHERN ONTARIO BIO-SECURITY SENTINEL
+    </text>
+
+    <!-- Main Title -->
+    <text x="0" y="100" fill="#f4f6fd" font-family="'Fraunces', serif, Georgia" font-size="76" font-weight="700" letter-spacing="-0.03em" line-height="1.1">
+      Field screening.
+    </text>
+    <text x="0" y="175" fill="#a9baff" font-family="'Fraunces', serif, Georgia" font-size="76" font-style="italic" font-weight="400" letter-spacing="-0.03em">
+      Zero latency.
+    </text>
+
+    <!-- Subtitle -->
+    <text x="0" y="235" fill="#9daac2" font-family="'Hanken Grotesk', -apple-system, sans-serif" font-size="19" font-weight="400">
+      Multi-stage automated gate pipeline for invasive plant and insect
+    </text>
+    <text x="0" y="263" fill="#9daac2" font-family="'Hanken Grotesk', -apple-system, sans-serif" font-size="19" font-weight="400">
+      detection with instant OMNRF/CFIA audit trails.
+    </text>
+
+    <!-- Feature tags -->
+    <g transform="translate(0, 315)">
+      <rect width="136" height="32" rx="16" fill="#141c2c" stroke="#27364f" stroke-width="1"/>
+      <text x="16" y="20" fill="#9fb1d4" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">4-GATE AUDIT</text>
+
+      <rect x="146" width="130" height="32" rx="16" fill="#141c2c" stroke="#27364f" stroke-width="1"/>
+      <text x="162" y="20" fill="#9fb1d4" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">EXIF GPS SYNC</text>
+
+      <rect x="286" width="130" height="32" rx="16" fill="#141c2c" stroke="#27364f" stroke-width="1"/>
+      <text x="302" y="20" fill="#9fb1d4" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">BILINGUAL EN/FR</text>
+    </g>
+  </g>
+
+  <!-- Right Graphic Column (Radar Reticle & Verdict Card) -->
+  <g transform="translate(760, 110)">
+    <!-- Ambient wireframe circle -->
+    <circle cx="210" cy="210" r="190" fill="none" stroke="#202c46" stroke-width="1.5" stroke-dasharray="4 6"/>
+    <circle cx="210" cy="210" r="130" fill="none" stroke="#253556" stroke-width="1"/>
+    <circle cx="210" cy="210" r="70" fill="none" stroke="#31446e" stroke-width="1.2"/>
+    <line x1="210" y1="10" x2="210" y2="410" stroke="#1f2c47" stroke-width="1"/>
+    <line x1="10" y1="210" x2="410" y2="210" stroke="#1f2c47" stroke-width="1"/>
+
+    <!-- Sweep cone -->
+    <path d="M 210 210 L 370 120 A 190 190 0 0 0 210 20 Z" fill="#4d72b8" fill-opacity="0.12"/>
+    <line x1="210" y1="210" x2="370" y2="120" stroke="#7aa3f0" stroke-width="1.5" filter="url(#glow)"/>
+
+    <!-- Radar blips -->
+    <circle cx="295" cy="140" r="5" fill="#ff7373" filter="url(#glow)"/>
+    <circle cx="295" cy="140" r="10" fill="none" stroke="#ff7373" stroke-width="1" stroke-opacity="0.6"/>
+    <circle cx="160" cy="270" r="4" fill="#3dd68c"/>
+    <circle cx="250" cy="290" r="3.5" fill="#ffd166"/>
+
+    <!-- Glass Verdict Card floating -->
+    <g transform="translate(40, 270)">
+      <rect width="330" height="150" rx="14" fill="#0c1220" fill-opacity="0.9" stroke="#34466d" stroke-width="1.5"/>
+      <rect x="18" y="18" width="80" height="22" rx="4" fill="#38181e" stroke="#662630" stroke-width="1"/>
+      <text x="26" y="33" fill="#ff9090" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">ALERT: ESCALATE</text>
+      <text x="18" y="66" fill="#f0f3ff" font-family="'Fraunces', serif" font-size="18" font-weight="600">Lycorma delicatula</text>
+      <text x="18" y="86" fill="#8898b8" font-family="'Hanken Grotesk', sans-serif" font-size="13">Spotted Lanternfly · 43.6532° N, 79.3832° W</text>
+      <line x1="18" y1="102" x2="312" y2="102" stroke="#222e47" stroke-width="1"/>
+      <text x="18" y="126" fill="#7587a8" font-family="'JetBrains Mono', monospace" font-size="11">GATE 4/4 CONFIRMED · 98.7% MATCH</text>
+    </g>
+  </g>
+</svg>
