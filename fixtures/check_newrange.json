@@ -1,0 +1,29 @@
+{
+  "verdict": "NEW_RANGE",
+  "rule": "range",
+  "reason": "No research-grade record of Asian longhorned beetle within 200 km in the last 3 years. Not auto-reported; call the Invading Species Hotline.",
+  "proposals": [
+    [
+      {
+        "taxonName": "Anoplophora glabripennis",
+        "taxonId": 128525,
+        "confidence": 0.94,
+        "source": "ollama:qwen3.5:9b"
+      }
+    ]
+  ],
+  "evidence": {
+    "species": {
+      "commonName": "Asian longhorned beetle",
+      "scientificName": "Anoplophora glabripennis",
+      "taxonId": 128525,
+      "kind": "insect",
+      "lookalike": "Whitespotted sawyer (Monochamus scutellatus)"
+    },
+    "within50Km": 0,
+    "within200Km": 0,
+    "nearest": [],
+    "hotline": "1-800-563-7711"
+  },
+  "nearest": []
+}

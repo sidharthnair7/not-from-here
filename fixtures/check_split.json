@@ -1,0 +1,44 @@
+{
+  "verdict": "NOT_VERIFIED_SPLIT",
+  "rule": "agreement",
+  "reason": "The proposers disagree on the species: \"Heracleum mantegazzianum\" vs \"Heracleum maximum\".",
+  "proposals": [
+    [
+      {
+        "taxonName": "Heracleum mantegazzianum",
+        "taxonId": 130228,
+        "confidence": 0.62,
+        "source": "ollama:qwen3.5:9b"
+      }
+    ],
+    [
+      {
+        "taxonName": "Heracleum maximum",
+        "taxonId": 0,
+        "confidence": 0.71,
+        "source": "bedrock:nova-2-lite"
+      }
+    ]
+  ],
+  "evidence": {
+    "proposals": [
+      [
+        {
+          "taxonName": "Heracleum mantegazzianum",
+          "taxonId": 130228,
+          "confidence": 0.62,
+          "source": "ollama:qwen3.5:9b"
+        }
+      ],
+      [
+        {
+          "taxonName": "Heracleum maximum",
+          "taxonId": 0,
+          "confidence": 0.71,
+          "source": "bedrock:nova-2-lite"
+        }
+      ]
+    ]
+  },
+  "nearest": []
+}

@@ -1,0 +1,71 @@
+{
+  "verdict": "REPORT",
+  "rule": "all",
+  "reason": "Common reed (Phragmites) (Phragmites australis): proposers agree, on the Ontario list, 218 records within 50 km, in season.",
+  "proposals": [
+    [
+      {
+        "taxonName": "Phragmites australis",
+        "taxonId": 64237,
+        "confidence": 0.91,
+        "source": "ollama:qwen3.5:9b"
+      },
+      {
+        "taxonName": "Typha latifolia",
+        "taxonId": 0,
+        "confidence": 0.05,
+        "source": "ollama:qwen3.5:9b"
+      }
+    ]
+  ],
+  "evidence": {
+    "species": {
+      "commonName": "Common reed (Phragmites)",
+      "scientificName": "Phragmites australis",
+      "taxonId": 64237,
+      "kind": "plant",
+      "lookalike": "Native Phragmites australis subsp. americanus"
+    },
+    "within50Km": 218,
+    "within200Km": 1412,
+    "nearest": [
+      {
+        "id": 401358622,
+        "observedOn": "2026-09-18",
+        "distanceKm": 6.7,
+        "url": "https://www.inaturalist.org/observations/401358622"
+      }
+    ],
+    "month": 9,
+    "histogram": {
+      "1": 380,
+      "2": 503,
+      "3": 583,
+      "4": 891,
+      "5": 828,
+      "6": 1002,
+      "7": 1655,
+      "8": 2264,
+      "9": 1622,
+      "10": 917,
+      "11": 1030,
+      "12": 375
+    },
+    "seasonDataAvailable": true,
+    "photo": {
+      "lat": 44.3,
+      "lng": -78.32,
+      "takenAt": "2026-09-19"
+    }
+  },
+  "nearest": [
+    {
+      "id": 401358622,
+      "observedOn": "2026-09-18",
+      "distanceKm": 6.7,
+      "url": "https://www.inaturalist.org/observations/401358622"
+    }
+  ],
+  "report_text": "Sighting of common reed (Phragmites australis) near 44.30, -78.32 on 2026-09-19. Two proposers agreed. iNaturalist holds 218 research-grade records within 50 km in the last three years, the nearest 6.7 km away on 2026-09-18. September is within the species' recorded season in Ontario.",
+  "sighting_id": 1
+}

@@ -1,0 +1,23 @@
+{
+  "source": "Species chosen from the Invasive Species Centre and the Invading Species Awareness Program profiles. iNaturalist taxon ids looked up live on 2026-09-19 via GET https://api.inaturalist.org/v1/taxa?q=<name>&rank=species.",
+  "hotline": "1-800-563-7711",
+  "hotlineSource": "https://www.invadingspecies.com/programs/invading-species-reporting/",
+  "species": [
+    {"commonName": "Common reed (Phragmites)", "scientificName": "Phragmites australis", "taxonId": 64237, "kind": "plant", "lookalike": "Native Phragmites australis subsp. americanus"},
+    {"commonName": "Japanese knotweed", "scientificName": "Reynoutria japonica", "taxonId": 914922, "kind": "plant", "lookalike": null},
+    {"commonName": "Garlic mustard", "scientificName": "Alliaria petiolata", "taxonId": 56061, "kind": "plant", "lookalike": null},
+    {"commonName": "Wild parsnip", "scientificName": "Pastinaca sativa", "taxonId": 59778, "kind": "plant", "lookalike": "Golden alexanders (Zizia aurea)"},
+    {"commonName": "Dog-strangling vine", "scientificName": "Vincetoxicum rossicum", "taxonId": 632667, "kind": "plant", "lookalike": "Common milkweed (Asclepias syriaca)"},
+    {"commonName": "Giant hogweed", "scientificName": "Heracleum mantegazzianum", "taxonId": 130228, "kind": "plant", "lookalike": "Cow parsnip (Heracleum maximum)"},
+    {"commonName": "Purple loosestrife", "scientificName": "Lythrum salicaria", "taxonId": 61321, "kind": "plant", "lookalike": "Fireweed (Chamaenerion angustifolium)"},
+    {"commonName": "Common buckthorn", "scientificName": "Rhamnus cathartica", "taxonId": 54811, "kind": "plant", "lookalike": null},
+    {"commonName": "Tree-of-heaven", "scientificName": "Ailanthus altissima", "taxonId": 57278, "kind": "plant", "lookalike": "Staghorn sumac (Rhus typhina)"},
+    {"commonName": "Emerald ash borer", "scientificName": "Agrilus planipennis", "taxonId": 70057, "kind": "insect", "lookalike": null},
+    {"commonName": "Spotted lanternfly", "scientificName": "Lycorma delicatula", "taxonId": 324726, "kind": "insect", "lookalike": null},
+    {"commonName": "Spongy moth (LDD)", "scientificName": "Lymantria dispar", "taxonId": 47802, "kind": "insect", "lookalike": null},
+    {"commonName": "Asian longhorned beetle", "scientificName": "Anoplophora glabripennis", "taxonId": 128525, "kind": "insect", "lookalike": "Whitespotted sawyer (Monochamus scutellatus)"},
+    {"commonName": "Hemlock woolly adelgid", "scientificName": "Adelges tsugae", "taxonId": 61513, "kind": "insect", "lookalike": null},
+    {"commonName": "Zebra mussel", "scientificName": "Dreissena polymorpha", "taxonId": 116340, "kind": "mollusc", "lookalike": "Quagga mussel (Dreissena bugensis)"},
+    {"commonName": "Round goby", "scientificName": "Neogobius melanostomus", "taxonId": 106743, "kind": "fish", "lookalike": "Mottled sculpin (Cottus bairdii)"}
+  ]
+}
