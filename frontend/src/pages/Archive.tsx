@@ -116,24 +116,26 @@ export const Archive: React.FC = () => {
               {/* Optical Zoom Controls */}
               <div className="archive-zoom-ctrl">
                 <span className="archive-zoom-label">{t('archive_zoom')}</span>
+                {/* `scale` is the camera distance (3 × scale), so a bigger number is further away.
+                    The slider is inverted so that right means closer, the way every zoom control works. */}
                 <input
                   type="range"
                   min="1.2"
                   max="4.0"
                   step="0.1"
-                  value={scale}
-                  onChange={(e) => setScale(parseFloat(e.target.value))}
+                  value={5.2 - scale}
+                  onChange={(e) => setScale(5.2 - parseFloat(e.target.value))}
                   className="archive-zoom-slider"
                   aria-label={t('archive_zoom')}
                 />
                 <div className="archive-zoom-presets">
                   <button
                     type="button"
-                    className={`archive-zoom-btn ${Math.abs(scale - 1.4) < 0.2 ? 'active' : ''}`}
-                    onClick={() => setScale(1.4)}
-                    title="Wide view"
+                    className={`archive-zoom-btn ${Math.abs(scale - 3.4) < 0.2 ? 'active' : ''}`}
+                    onClick={() => setScale(3.4)}
+                    title="Wide view, the whole sphere"
                   >
-                    1.4x
+                    Wide
                   </button>
                   <button
                     type="button"
@@ -141,15 +143,15 @@ export const Archive: React.FC = () => {
                     onClick={() => setScale(2.2)}
                     title="Standard view"
                   >
-                    2.2x
+                    Standard
                   </button>
                   <button
                     type="button"
-                    className={`archive-zoom-btn ${Math.abs(scale - 3.4) < 0.2 ? 'active' : ''}`}
-                    onClick={() => setScale(3.4)}
-                    title="Macro view"
+                    className={`archive-zoom-btn ${Math.abs(scale - 1.4) < 0.2 ? 'active' : ''}`}
+                    onClick={() => setScale(1.4)}
+                    title="Close view, one tile at a time"
                   >
-                    3.4x
+                    Close
                   </button>
                 </div>
               </div>

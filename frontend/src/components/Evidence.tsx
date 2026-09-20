@@ -77,9 +77,11 @@ export const Evidence: React.FC<EvidenceProps> = ({ result }) => {
           </div>
         ) : (
           <p className="sub" style={{ margin: 0 }}>
-            {rangeRan
-              ? 'No research-grade records within 200 km of this spot.'
-              : `Not looked up: the check stopped at rule ${failedAt}, before the range check.`}
+            {!rangeRan
+              ? `Not looked up: the check stopped at rule ${failedAt}, before the range check.`
+              : (result.evidence?.range?.count_200km ?? 0) > 0
+              ? `No research-grade records within 50 km of this spot; ${result.evidence?.range?.count_200km} within 200 km.`
+              : 'No research-grade records within 200 km of this spot.'}
           </p>
         )}
       </section>

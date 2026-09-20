@@ -67,12 +67,12 @@ describe('Archive Page and Specimen Texture', () => {
       </LanguageProvider>
     );
 
-    const macroBtn = screen.getByTitle('Macro view');
+    const macroBtn = screen.getByTitle('Close view, one tile at a time');
     expect(macroBtn).toBeInTheDocument();
     fireEvent.click(macroBtn);
     expect(macroBtn).toHaveClass('active');
 
-    const wideBtn = screen.getByTitle('Wide view');
+    const wideBtn = screen.getByTitle('Wide view, the whole sphere');
     fireEvent.click(wideBtn);
     expect(wideBtn).toHaveClass('active');
   });
