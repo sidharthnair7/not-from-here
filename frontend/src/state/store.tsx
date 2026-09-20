@@ -37,6 +37,10 @@ export interface StoreContextType {
   steps: StepStatus[];
   result: CheckResult | null;
   live: boolean;
+  /** True after a real upload was checked with no backend answering: nothing was analysed, say so. */
+  offline: boolean;
+  /** Proposer names from /api/health, empty when there is no backend. */
+  proposers: string[];
   sightings: Sighting[];
   refusals: Refusal[];
   newId: string | null;
@@ -98,6 +102,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [steps, setSteps] = useState<StepStatus[]>(['idle', 'idle', 'idle', 'idle']);
   const [result, setResult] = useState<CheckResult | null>(null);
   const [live, setLive] = useState<boolean>(false);
+  const [offline, setOffline] = useState<boolean>(false);
+  const [proposers, setProposers] = useState<string[]>([]);
   const [sightings, setSightings] = useState<Sighting[]>(() =>
     persisted ? persisted.sightings : seedSightings()
   );
@@ -130,6 +136,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     refreshLedger();
+    API.health().then((h) => setProposers(h?.proposers ?? []));
   }, [refreshLedger]);
 
   const showToast = useCallback((msg: string) => {
@@ -169,6 +176,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setPhase('idle');
     setSteps(['idle', 'idle', 'idle', 'idle']);
     setResult(null);
+    setOffline(false);
   }, []);
 
   const selectScenario = useCallback(
@@ -236,6 +244,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
       setPhase('running');
       setResult(null);
+      setOffline(false);
       setSteps(['idle', 'idle', 'idle', 'idle']);
 
       if (scrollTargetEl && window.matchMedia('(max-width:900px)').matches) {
@@ -251,6 +260,13 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         lng
       });
       setLive(isLive);
+
+      // A real photo with no backend answering: never let a fixture stand in for it
+      if (!isLive && uploadFiles.length > 0) {
+        setOffline(true);
+        setPhase('idle');
+        return;
+      }
 
       const fi = failIdx(data.verdict);
       setResult(data);
@@ -328,6 +344,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         steps,
         result,
         live,
+        offline,
+        proposers,
         sightings,
         refusals,
         newId,

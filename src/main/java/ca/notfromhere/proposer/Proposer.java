@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * A proposer looks at the photo and names candidates. That is all it is allowed to do. It never sees the gate's
  * rules, and the gate never trusts it: a proposer can get a candidate INTO the gate and nothing more.
- * Implementations: OllamaProposer (local model, default), BedrockProposer (hosted, optional).
+ * Implementations: OllamaProposer (local model, default), PlantNetProposer (hosted, plants only).
  */
 public interface Proposer {
 
@@ -16,4 +16,9 @@ public interface Proposer {
 
     /** Up to three candidates, most likely first. An empty list on any failure; the gate turns that into a refusal. */
     List<Proposal> propose(byte[] image, String mimeType);
+
+    /** What this proposer can name, in plain words, for the note shown when it names nothing. */
+    default String scope() {
+        return "plants, insects, molluscs and fish from the Ontario catalogue";
+    }
 }

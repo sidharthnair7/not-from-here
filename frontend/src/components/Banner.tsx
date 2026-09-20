@@ -5,7 +5,25 @@ import { V } from '../lib/verdicts';
 import { IconForVerdict, IdleIcon } from './Icons';
 
 export const Banner: React.FC = () => {
-  const { phase, result, scn, upload, copyText } = useStore();
+  const { phase, result, scn, upload, offline, copyText } = useStore();
+
+  if (offline) {
+    return (
+      <div className="banner pop" data-t="warn" role="status" data-testid="offline">
+        <div className="v">
+          <IdleIcon />
+          <div>
+            <h2>No model behind this page</h2>
+            <p className="rule">Your photo was not analysed and was not sent anywhere.</p>
+          </div>
+        </div>
+        <p className="why">
+          This copy runs the interface only. The demo photos show real results captured from the full system. To
+          check your own photo, run the backend on your machine or use the hosted copy: see the README on GitHub.
+        </p>
+      </div>
+    );
+  }
 
   if (phase === 'done' && result) {
     const t = V[result.verdict] || { label: result.verdict, tone: 'warn' };
@@ -19,6 +37,11 @@ export const Banner: React.FC = () => {
           </div>
         </div>
         <p className="why">{result.reason}</p>
+        {result.note && (
+          <p className="why" data-testid="note">
+            {result.note}
+          </p>
+        )}
         {result.agreement && result.agreement.views > 1 && (
           <p className="rule" data-testid="agreement">
             {result.agreement.agreeing} of {result.agreement.views} views agree

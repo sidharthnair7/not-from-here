@@ -34,7 +34,24 @@ export interface CheckApiResponse {
   data: CheckResult;
 }
 
+export interface ApiHealth {
+  status: string;
+  provider: string;
+  proposers: string[];
+}
+
 export const API = {
+  /** Which proposer this backend runs, or null when there is no backend. */
+  async health(): Promise<ApiHealth | null> {
+    try {
+      const r = await fetch('/api/health');
+      if (!r.ok) return null;
+      return (await r.json()) as ApiHealth;
+    } catch {
+      return null;
+    }
+  },
+
   /** The shared ledger, or null when the backend is not reachable (demo mode keeps the local store). */
   async sightings(): Promise<ApiSighting[] | null> {
     try {

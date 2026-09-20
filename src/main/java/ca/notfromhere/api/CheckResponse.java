@@ -25,7 +25,9 @@ public record CheckResponse(
         List<String> sources,
         List<PhotoIntegrityOut> photo_integrity,
         AgreementOut agreement,
-        ca.notfromhere.species.Species.Guide how_to_tell) {
+        ca.notfromhere.species.Species.Guide how_to_tell,
+        /** Set only when no proposer named anything: says what this server's proposers can name. */
+        String note) {
 
     public record CandidateOut(String taxonName, String common, double confidence) {
     }

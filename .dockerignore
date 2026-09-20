@@ -1,0 +1,12 @@
+target/
+data/
+cache/
+docs/
+fixtures/
+frontend/node_modules/
+frontend/dist/
+frontend/dev-dist/
+.env
+.git/
+.idea/
+*.md

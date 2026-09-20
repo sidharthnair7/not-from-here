@@ -54,11 +54,23 @@ Before writing the proposer we tested the local model on ten research-grade iNat
 
 Deterministic (temperature 0, fixed seed); every photo gives the same answer on every run. The four misses are the point of the app: wild parsnip was called golden alexanders, giant hogweed was called cow parsnip (both are the native lookalikes on our list), and dog-strangling vine and zebra mussel came back as "Other". In every one of those cases the gate refuses instead of reporting. Re-run it yourself: `mvn test -Dgroups=live -DexcludedGroups=` (needs Ollama).
 
+### Two proposers, one gate
+
+The proposer is an interface (`Proposer`): it names candidates and nothing more. The hosted copy has no GPU, so it runs a second implementation, `PlantNetProposer`, on Pl@ntNet's free identification API (plants only). Same gate, same four rules, same ledger. Measured on the same test photos (Sep 20, 2026, `PlantNetLiveTest`):
+
+| Proposer | Covers | Top-1 on the 7 plant photos | Top-1 on all 10 |
+|----------|--------|-----------------------------|-----------------|
+| `ollama:qwen3.5:9b` (local build, default) | the whole catalogue | 4 / 7 | 6 / 10 |
+| `plantnet:v2/all` (hosted copy) | plants only | 6 / 7 | not applicable |
+
+Pl@ntNet's one miss was dog-strangling vine, named as meadowsweet (*Filipendula ulmaria*); rule 2 refuses it under that name, because Pl@ntNet answers with real species names rather than a catalogue pick. A photo with no plant in it produces no candidate, and the card says what the server's proposer covers. Either proposer can be wrong; neither can report on its own.
+
 ## Stack
 
 - Backend: Java 25, Spring Boot 4.1, Maven, H2 file database. iNaturalist public API (no key) with a disk cache in `cache/` so the demo works offline.
-- Proposer: a local vision model through Ollama (`qwen3.5:9b`, JSON mode, catalogue prompt) by default; `LLM_PROVIDER` selects the implementation.
-- Frontend: React + Vite, in `frontend/`.
+- Proposer: a local vision model through Ollama (`qwen3.5:9b`, JSON mode, catalogue prompt) by default, or Pl@ntNet (`LLM_PROVIDER=plantnet`, plants only) for a box with no GPU.
+- Frontend: React + Vite, in `frontend/`. The Docker image serves the built frontend from the Spring Boot jar, one origin, one process.
+- CI: GitHub Actions run the offline tests on every push and publish the image to `ghcr.io/sidharthnair7/not-from-here`.
 
 ## Run
 
@@ -82,20 +94,26 @@ Tests (no network, no model):
 mvn test
 ```
 
+Hosted copy (Docker, Pl@ntNet as the proposer, no GPU): see [`docs/DEPLOY.md`](docs/DEPLOY.md). Locally, the same thing is
+`PLANTNET_API_KEY=... LLM_PROVIDER=plantnet mvn spring-boot:run` (or put the key in a git-ignored `.env`).
+
 ## Layout
 
 ```
 src/main/java/ca/notfromhere/
   api/       CheckController, CheckService (views, EXIF, ledger, response mapping), CheckResponse
   gate/      Gate.java (the four rules), Verdict, Proposal, PhotoMeta, GateResult, RangeLookup, OccurrenceLookup
-  proposer/  Proposer, Catalogue, OllamaProposer
+  proposer/  Proposer, Catalogue, OllamaProposer, PlantNetProposer
+  web/       StaticSiteConfig (serves the built frontend from the jar)
   species/   Species, SpeciesList (loads ontario_invasives.json)
   inat/      INatClient, GbifClient, CachedHttp (disk cache keyed by URL)
   photo/     PhotoMetadata (EXIF read server-side)
   sightings/ Sighting (JPA), SightingRepository, SightingService (duplicates, exports), SightingController
 src/main/resources/ontario_invasives.json
-src/test/java/ca/notfromhere/gate/GateTest.java            17 unit tests, no network (frontend: 18 Vitest tests)
-src/test/java/ca/notfromhere/proposer/ProposerLiveTest.java the kill check, tagged live
+src/test/java/ca/notfromhere/gate/GateTest.java            17 unit tests, no network (frontend: 19 Vitest tests)
+src/test/java/ca/notfromhere/proposer/PlantNetProposerTest.java  5 unit tests on Pl@ntNet's answer shape, no network
+src/test/java/ca/notfromhere/proposer/ProposerLiveTest.java the kill check, tagged live (PlantNetLiveTest: the same for Pl@ntNet)
+Dockerfile, docker-compose.yml, docs/DEPLOY.md                the hosted copy; .github/workflows/ tests and the image
 src/test/resources/photos/                                  10 test photos + extra views + expected.json
 fixtures/   real responses captured from /api/check (report, split, insufficient, new range)
 frontend/   Vite app

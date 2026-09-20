@@ -1,0 +1,18 @@
+# The hosted copy: `PLANTNET_API_KEY=... docker compose up -d --build` on any box with Docker, then open port 80.
+services:
+  app:
+    build: .
+    image: not-from-here
+    ports:
+      - "80:8080"
+    environment:
+      LLM_PROVIDER: plantnet
+      PLANTNET_API_KEY: ${PLANTNET_API_KEY:?set PLANTNET_API_KEY}
+    volumes:
+      - nfh-data:/app/data
+      - nfh-cache:/app/cache
+    restart: unless-stopped
+
+volumes:
+  nfh-data:
+  nfh-cache:

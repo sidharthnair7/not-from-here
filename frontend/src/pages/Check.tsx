@@ -19,6 +19,7 @@ export const Check: React.FC = () => {
     phase,
     result,
     live,
+    proposers,
     selectScenario,
     setCoordinates,
     runCheck,
@@ -152,8 +153,9 @@ export const Check: React.FC = () => {
             <h2>Your sighting</h2>
             <p className="sub">Drop a photo, or try one of the demo photos.</p>
             <p className="honesty" data-testid="honesty">
-              Our model is right about 6 times in 10 on our test set. That is why nothing is reported on its
-              word alone: four rules decide, and the first one that fails stops the report.
+              {proposers.some((p) => p.startsWith('plantnet'))
+                ? 'This copy proposes with Pl@ntNet, which names plants only; insects, mussels and fish need the local build. Either way nothing is reported on the proposer\'s word alone: four rules decide, and the first one that fails stops the report.'
+                : 'Our model is right about 6 times in 10 on our test set. That is why nothing is reported on its word alone: four rules decide, and the first one that fails stops the report.'}
             </p>
 
             <PhotoFrame />
@@ -220,8 +222,8 @@ export const Check: React.FC = () => {
 
             <p className="demo-note">
               {live
-                ? 'Live: photos go to the local backend for one check and are not stored; only a hash of the photo and the rounded location go into the record.'
-                : 'Demo mode: results come from sample data until the backend is connected. Photos you upload are not sent anywhere.'}
+                ? 'Live: photos go to the backend for one check and are not stored; only a hash of the photo and the rounded location go into the record.'
+                : 'Demo mode: the demo photos show results captured from the full system. A photo of your own is not sent anywhere and is not analysed here.'}
             </p>
           </div>
 

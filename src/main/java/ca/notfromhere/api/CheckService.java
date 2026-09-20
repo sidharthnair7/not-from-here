@@ -227,8 +227,17 @@ public class CheckService {
 
         Species.Guide howToTell = ev.get("howToTell") instanceof Species.Guide g ? g : null;
 
+        // When nothing was named at all, say what the proposers on this server can name, so a person who dropped
+        // an insect photo on a plants-only server learns that instead of guessing the app is broken.
+        String note = null;
+        if (top == null) {
+            String scopes = String.join("; ", proposers.stream().map(Proposer::scope).distinct().toList());
+            note = "Nothing was recognised in this photo. The proposer on this server covers " + scopes + ".";
+        }
+
         return new CheckResponse(verdict.name(), ruleLabel, reason, proposals, trace, nearest, hist, month,
-                evidence, reportText, sightingId, alreadyReported, duplicateOf, sources, integrity, agreement, howToTell);
+                evidence, reportText, sightingId, alreadyReported, duplicateOf, sources, integrity, agreement, howToTell,
+                note);
     }
 
     @SuppressWarnings("unchecked")

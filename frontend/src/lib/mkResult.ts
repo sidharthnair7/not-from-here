@@ -85,6 +85,8 @@ export interface CheckResult {
   photo_integrity?: PhotoIntegrity[];
   agreement?: Agreement;
   how_to_tell?: HowToTell | null;
+  /** Set only when nothing was recognised: what the proposer on this server can name. */
+  note?: string | null;
 }
 
 export interface MkResultOptions {

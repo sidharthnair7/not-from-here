@@ -3,6 +3,21 @@ import '@testing-library/jest-dom';
 // Mock scrollTo and canvas contexts for jsdom
 window.scrollTo = window.scrollTo || (() => {});
 
+// jsdom has no matchMedia; the store asks for reduced motion before every check
+if (typeof window.matchMedia !== 'function') {
+  window.matchMedia = (query: string) =>
+    ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false
+    }) as MediaQueryList;
+}
+
 if (typeof HTMLCanvasElement !== 'undefined') {
   HTMLCanvasElement.prototype.getContext = () => null;
 }
