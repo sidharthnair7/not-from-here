@@ -3,7 +3,8 @@ import { Sighting, Refusal } from '../lib/tile';
 import { CheckResult } from '../lib/mkResult';
 import { SCEN } from '../lib/fixtures';
 import { seedSightings, seedRefusals } from '../lib/fixtures';
-import { API } from '../lib/api';
+import { API, ApiSighting } from '../lib/api';
+import { SP } from '../lib/species';
 import { failIdx } from '../lib/verdicts';
 import { loadPersistedState, savePersistedState, clearPersistedState } from '../lib/persist';
 
@@ -27,7 +28,9 @@ export interface StoreContextType {
   scn: string | null;
   upload: string | null;
   uploadFile: File | null;
+  uploadFiles: File[];
   uploadGps: PhotoGpsInfo | null;
+  ledgerLive: boolean;
   lat: number;
   lng: number;
   phase: Phase;
@@ -43,6 +46,8 @@ export interface StoreContextType {
 
   selectScenario: (k: string) => void;
   setUpload: (dataUrl: string, file: File, gpsInfo?: PhotoGpsInfo | null) => void;
+  addUploadView: (file: File) => void;
+  refreshLedger: () => Promise<void>;
   setCoordinates: (lat: number, lng: number) => void;
   resetRun: () => void;
   runCheck: (scrollTargetEl?: HTMLElement | null) => Promise<void>;
@@ -57,13 +62,36 @@ const StoreContext = createContext<StoreContextType | null>(null);
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+/** Species key in SP for a scientific name from the backend, or the closest thing we can draw. */
+const keyForScientificName = (name: string): string => {
+  const wanted = (name || '').trim().toLowerCase();
+  const hit = Object.keys(SP).find((k) => SP[k].name.toLowerCase() === wanted);
+  return hit || 'phragmites';
+};
+
+/** A ledger row from the backend as the sphere and the drawer expect it. */
+const fromApiSighting = (row: ApiSighting): Sighting | null => {
+  if (!row.result) return null;
+  return {
+    id: 'api' + row.id,
+    key: keyForScientificName(row.scientific_name),
+    date: row.observed_on,
+    place: `${row.lat.toFixed(3)}, ${row.lng.toFixed(3)}`,
+    seed: row.id,
+    res: row.result,
+    sample: false
+  };
+};
+
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const persisted = loadPersistedState();
 
   const [scn, setScn] = useState<string | null>(null);
   const [upload, setUploadState] = useState<string | null>(null);
   const [uploadFile, setUploadFile] = useState<File | null>(null);
+  const [uploadFiles, setUploadFiles] = useState<File[]>([]);
   const [uploadGps, setUploadGps] = useState<PhotoGpsInfo | null>(null);
+  const [ledgerLive, setLedgerLive] = useState<boolean>(false);
   const [lat, setLat] = useState<number>(() => (persisted ? persisted.lat : 44.3));
   const [lng, setLng] = useState<number>(() => (persisted ? persisted.lng : -78.32));
   const [phase, setPhase] = useState<Phase>('idle');
@@ -87,6 +115,22 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     savePersistedState({ sightings, refusals, lat, lng });
   }, [sightings, refusals, lat, lng]);
+
+  // The shared ledger wins over the local store whenever the backend answers
+  const refreshLedger = useCallback(async () => {
+    const rows = await API.sightings();
+    if (!rows) {
+      setLedgerLive(false);
+      return;
+    }
+    setLedgerLive(true);
+    const mapped = rows.map(fromApiSighting).filter((s): s is Sighting => s !== null);
+    setSightings(mapped);
+  }, []);
+
+  useEffect(() => {
+    refreshLedger();
+  }, [refreshLedger]);
 
   const showToast = useCallback((msg: string) => {
     setToastMsg(msg);
@@ -133,6 +177,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setScn(k);
       setUploadState(null);
       setUploadFile(null);
+      setUploadFiles([]);
       setUploadGps(null);
       setLat(SCEN[k].lat);
       setLng(SCEN[k].lng);
@@ -141,10 +186,15 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     [phase, resetRun]
   );
 
+  const addUploadView = useCallback((file: File) => {
+    setUploadFiles((prev) => (prev.length >= 3 ? prev : [...prev, file]));
+  }, []);
+
   const setUpload = useCallback(
     (dataUrl: string, file: File, gpsInfo: PhotoGpsInfo | null = null) => {
       setUploadState(dataUrl);
       setUploadFile(file);
+      setUploadFiles([file]);
       setUploadGps(gpsInfo);
       if (!scn) {
         setScn('phragmites');
@@ -196,6 +246,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const { live: isLive, data } = await API.check({
         scn: effectiveScn,
         file: uploadFile,
+        files: uploadFiles,
         lat,
         lng
       });
@@ -228,7 +279,11 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const s = SCEN[effectiveScn];
       const observationDate = uploadGps?.date || s.date;
 
-      if (data.verdict === 'REPORT') {
+      if (data.verdict === 'REPORT' && isLive && data.sighting_id) {
+        // the backend wrote it to the shared ledger; re-read the ledger so the sphere shows the real record
+        setNewId('api' + data.sighting_id);
+        await refreshLedger();
+      } else if (data.verdict === 'REPORT') {
         const id = 'n' + Date.now();
         setNewId(id);
         const newSighting: Sighting = {
@@ -254,7 +309,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setRefusals((prev) => [newRefusal, ...prev]);
       }
     },
-    [phase, scn, uploadFile, uploadGps, lat, lng]
+    [phase, scn, uploadFile, uploadFiles, uploadGps, lat, lng, refreshLedger]
   );
 
   return (
@@ -263,7 +318,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         scn,
         upload,
         uploadFile,
+        uploadFiles,
         uploadGps,
+        ledgerLive,
         lat,
         lng,
         phase,
@@ -278,6 +335,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         toastVisible,
         selectScenario,
         setUpload,
+        addUploadView,
+        refreshLedger,
         setCoordinates,
         resetRun,
         runCheck,

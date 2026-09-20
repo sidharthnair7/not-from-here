@@ -121,7 +121,8 @@ public class CheckService {
                 duplicateOf = existing.get().getId();
                 sightingId = existing.get().getId();
             } else {
-                sightingId = sightings.save(toSighting(result, meta, integrity, photos)).getId();
+                CheckResponse draft = toResponse(runs, result, meta, null, false, null, integrity);
+                sightingId = sightings.save(toSighting(result, meta, integrity, photos, json.writeValueAsString(draft))).getId();
             }
         }
 
@@ -130,7 +131,7 @@ public class CheckService {
 
     @SuppressWarnings("unchecked")
     private Sighting toSighting(GateResult result, PhotoMeta meta, List<CheckResponse.PhotoIntegrityOut> integrity,
-                                List<PhotoInput> photos) {
+                                List<PhotoInput> photos, String responseJson) {
         Map<String, Object> ev = result.evidence();
         Species species = (Species) ev.get("species");
         Map<String, Object> agreement = (Map<String, Object>) ev.get("agreement");
@@ -148,7 +149,7 @@ public class CheckService {
                 gbif == null ? null : (Integer) gbif.get("within50Km"),
                 String.valueOf(ev.get("rangeSource")),
                 photos.isEmpty() ? null : sha256(photos.get(0).bytes()),
-                cameraMatches, reportText, json.writeValueAsString(ev), json.writeValueAsString(sources));
+                cameraMatches, reportText, json.writeValueAsString(ev), json.writeValueAsString(sources), responseJson);
     }
 
     @SuppressWarnings("unchecked")

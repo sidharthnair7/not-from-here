@@ -27,13 +27,17 @@ Built for NextStep Hacks 2026 ("Earth Forward"), September 19 to 20, 2026.
 - **When to look.** `GET /api/species/{taxonId}/season` returns the Ontario month histogram for a species.
 - **How to tell them apart.** When a refusal is about identity (a split between a listed species and its lookalike, or a native that is often mistaken for a listed one), the response carries `how_to_tell`: the distinguishing features paraphrased from the cited Ontario government or Invading Species Awareness Program page, with the source URL. Seven species have a guide; species without a cited page have none rather than an invented one.
 
+## Privacy (from DDIA chapter 1, "data systems, law and society")
+
+Where a person stood when they took a photo is personal data. So: photo bytes are never stored, only a SHA-256 of the first view; the exact position stays in the database for the duplicate check and every public read (`/api/sightings`, `.geojson`, `.csv`) rounds coordinates to three decimals, about 100 m; and `DELETE /api/sightings/{id}` is a real erasure, not a flag. The UI says which mode it is in: in demo mode photos never leave the browser, in live mode they go to the local backend for one check and are not kept.
+
 ## API
 
 | Call | Purpose |
 |------|---------|
 | `POST /api/check` multipart `photo` or `photos` (up to 3), optional `lat`, `lng`, `taken_at` | One subject, one verdict, full evidence |
 | `POST /api/check/batch` multipart `photos` (up to 50), optional `lat`, `lng` | Many subjects, one table |
-| `GET /api/sightings`, `/api/sightings/{id}`, `/api/sightings.geojson`, `/api/sightings.csv` | The verified ledger and exports |
+| `GET /api/sightings`, `/api/sightings/{id}`, `/api/sightings.geojson`, `/api/sightings.csv`, `DELETE /api/sightings/{id}` | The verified ledger, exports, erasure |
 | `GET /api/species`, `GET /api/species/{taxonId}/season` | The Ontario list and per-species seasonality |
 | `GET /api/health` | Provider and proposers in use |
 
@@ -90,7 +94,7 @@ src/main/java/ca/notfromhere/
   photo/     PhotoMetadata (EXIF read server-side)
   sightings/ Sighting (JPA), SightingRepository, SightingService (duplicates, exports), SightingController
 src/main/resources/ontario_invasives.json
-src/test/java/ca/notfromhere/gate/GateTest.java            17 unit tests, no network
+src/test/java/ca/notfromhere/gate/GateTest.java            17 unit tests, no network (frontend: 18 Vitest tests)
 src/test/java/ca/notfromhere/proposer/ProposerLiveTest.java the kill check, tagged live
 src/test/resources/photos/                                  10 test photos + extra views + expected.json
 fixtures/   real responses captured from /api/check (report, split, insufficient, new range)

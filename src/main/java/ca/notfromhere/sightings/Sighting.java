@@ -65,13 +65,18 @@ public class Sighting {
     @Column(length = 8000)
     private String sourcesJson;
 
+    /** The full API response as the UI saw it, so the record sphere can open the same result later. */
+    @Lob
+    @Column(length = 200000)
+    private String responseJson;
+
     protected Sighting() {
     }
 
     public Sighting(long taxonId, String scientificName, String commonName, double lat, double lng, LocalDate observedOn,
                     Instant reportedAt, int viewsAgreeing, int viewsTotal, int recordsWithin50Km, int recordsWithin200Km,
                     Integer gbifWithin50Km, String rangeSource, String photoSha256, Boolean cameraLocationMatches,
-                    String reportText, String evidenceJson, String sourcesJson) {
+                    String reportText, String evidenceJson, String sourcesJson, String responseJson) {
         this.taxonId = taxonId;
         this.scientificName = scientificName;
         this.commonName = commonName;
@@ -90,6 +95,7 @@ public class Sighting {
         this.reportText = reportText;
         this.evidenceJson = evidenceJson;
         this.sourcesJson = sourcesJson;
+        this.responseJson = responseJson;
     }
 
     public Long getId() { return id; }
@@ -111,4 +117,5 @@ public class Sighting {
     public String getReportText() { return reportText; }
     public String getEvidenceJson() { return evidenceJson; }
     public String getSourcesJson() { return sourcesJson; }
+    public String getResponseJson() { return responseJson; }
 }

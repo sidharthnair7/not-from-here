@@ -19,6 +19,12 @@ export const Banner: React.FC = () => {
           </div>
         </div>
         <p className="why">{result.reason}</p>
+        {result.agreement && result.agreement.views > 1 && (
+          <p className="rule" data-testid="agreement">
+            {result.agreement.agreeing} of {result.agreement.views} views agree
+            {result.agreement.needed ? ` (needs ${result.agreement.needed})` : ''}
+          </p>
+        )}
         {result.verdict === 'REPORT' && (
           <div className="actions">
             <button

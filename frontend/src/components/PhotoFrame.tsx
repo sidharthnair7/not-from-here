@@ -47,7 +47,8 @@ async function downscaleImage(file: File): Promise<{ blob: Blob; dataUrl: string
 }
 
 export const PhotoFrame: React.FC = () => {
-  const { scn, upload, uploadGps, setUpload, setCoordinates, showToast } = useStore();
+  const { scn, upload, uploadGps, uploadFiles, setUpload, addUploadView, setCoordinates, showToast } =
+    useStore();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isOver, setIsOver] = useState<boolean>(false);
@@ -145,11 +146,30 @@ export const PhotoFrame: React.FC = () => {
     setIsOver(false);
   };
 
+  /** First file becomes the photo; the next two become extra views of the same subject. */
+  const processFiles = useCallback(
+    async (list: FileList | File[]) => {
+      const files = Array.from(list).filter((f) => f.type.startsWith('image/')).slice(0, 3);
+      if (files.length === 0) return;
+      await processFile(files[0]);
+      for (const extra of files.slice(1)) {
+        try {
+          const { blob } = await downscaleImage(extra);
+          addUploadView(new File([blob], extra.name.replace(/\.[^/.]+$/, '.jpg'), { type: 'image/jpeg' }));
+        } catch {
+          addUploadView(extra);
+        }
+      }
+      if (files.length > 1) showToast(`${files.length} views of the same subject`);
+    },
+    [processFile, addUploadView, showToast]
+  );
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsOver(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      processFile(e.dataTransfer.files[0]);
+      processFiles(e.dataTransfer.files);
     }
   };
 
@@ -170,12 +190,13 @@ export const PhotoFrame: React.FC = () => {
 
   // Truthful chip text: Real EXIF vs No GPS vs Demo scenario
   let chipText = '';
+  const viewsNote = uploadFiles.length > 1 ? ` · ${uploadFiles.length} views` : '';
   if (upload) {
     if (uploadGps?.hasGps && uploadGps.lat !== undefined && uploadGps.lng !== undefined) {
       const d = uploadGps.date ? ` · ${fmt(uploadGps.date)}` : '';
-      chipText = `${t('gps_found')}${d} · ${uploadGps.lat.toFixed(3)}, ${uploadGps.lng.toFixed(3)}`;
+      chipText = `${t('gps_found')}${d} · ${uploadGps.lat.toFixed(3)}, ${uploadGps.lng.toFixed(3)}${viewsNote}`;
     } else {
-      chipText = t('gps_none');
+      chipText = `${t('gps_none')}${viewsNote}`;
     }
   } else if (s) {
     chipText = `${t('gps_found')} · ${fmt(s.date)} · ${s.lat.toFixed(3)}, ${s.lng.toFixed(3)}`;
@@ -219,13 +240,15 @@ export const PhotoFrame: React.FC = () => {
       <input
         ref={fileInputRef}
         type="file"
+        multiple
         id="file"
         accept="image/*"
         hidden
         onChange={(e) => {
           if (e.target.files && e.target.files.length > 0) {
-            processFile(e.target.files[0]);
+            processFiles(e.target.files);
           }
+          e.target.value = '';
         }}
       />
     </>

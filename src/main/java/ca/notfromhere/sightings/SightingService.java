@@ -21,6 +21,14 @@ public class SightingService {
     static final double DUPLICATE_RADIUS_M = 100.0;
     static final Duration DUPLICATE_WINDOW = Duration.ofDays(30);
 
+    /**
+     * Where a person stood is personal data (DDIA ch. 1, "data systems, law and society"). The exact position stays in
+     * the database for the duplicate check; everything public is rounded to three decimals, about 100 m.
+     */
+    public static double publicCoord(double v) {
+        return Math.round(v * 1000.0) / 1000.0;
+    }
+
     private final SightingRepository repository;
 
     public SightingService(SightingRepository repository) {
@@ -39,6 +47,14 @@ public class SightingService {
         return repository.save(sighting);
     }
 
+    /** The erasure path: a record can be removed on request, and the removal is real, not a flag. */
+    @Transactional
+    public boolean delete(long id) {
+        if (!repository.existsById(id)) return false;
+        repository.deleteById(id);
+        return true;
+    }
+
     public List<Sighting> latest() {
         return repository.findTop500ByOrderByReportedAtDesc();
     }
@@ -53,7 +69,7 @@ public class SightingService {
         for (Sighting s : latest()) {
             features.add(Map.of(
                     "type", "Feature",
-                    "geometry", Map.of("type", "Point", "coordinates", List.of(s.getLng(), s.getLat())),
+                    "geometry", Map.of("type", "Point", "coordinates", List.of(publicCoord(s.getLng()), publicCoord(s.getLat()))),
                     "properties", properties(s)));
         }
         return Map.of("type", "FeatureCollection", "features", features);
@@ -70,8 +86,8 @@ public class SightingService {
               .append(q(s.getCommonName())).append(',')
               .append(q(s.getScientificName())).append(',')
               .append(s.getTaxonId()).append(',')
-              .append(s.getLat()).append(',')
-              .append(s.getLng()).append(',')
+              .append(publicCoord(s.getLat())).append(',')
+              .append(publicCoord(s.getLng())).append(',')
               .append(s.getObservedOn()).append(',')
               .append(s.getReportedAt()).append(',')
               .append(s.getViewsAgreeing()).append(',')

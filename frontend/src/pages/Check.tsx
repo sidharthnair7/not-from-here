@@ -18,6 +18,7 @@ export const Check: React.FC = () => {
     lng,
     phase,
     result,
+    live,
     selectScenario,
     setCoordinates,
     runCheck,
@@ -187,8 +188,9 @@ export const Check: React.FC = () => {
             </p>
 
             <p className="demo-note">
-              Demo mode: results come from sample data until the backend is connected. Photos you
-              upload are not sent anywhere.
+              {live
+                ? 'Live: photos go to the local backend for one check and are not stored; only a hash of the photo and the rounded location go into the record.'
+                : 'Demo mode: results come from sample data until the backend is connected. Photos you upload are not sent anywhere.'}
             </p>
           </div>
 
@@ -240,6 +242,25 @@ export const Check: React.FC = () => {
                           </div>
                         </h3>
                         <p>{result.report_text}</p>
+                      </div>
+                    )}
+
+                    {result.how_to_tell && result.how_to_tell.tell.length > 0 && (
+                      <div className="hot" data-testid="how-to-tell">
+                        <b>How to tell</b>
+                        {result.how_to_tell.compares && (
+                          <p>Compared with: {result.how_to_tell.compares}</p>
+                        )}
+                        <ul>
+                          {result.how_to_tell.tell.map((line, i) => (
+                            <li key={i}>{line}</li>
+                          ))}
+                        </ul>
+                        {result.how_to_tell.source && (
+                          <a href={result.how_to_tell.source} target="_blank" rel="noopener noreferrer">
+                            Source
+                          </a>
+                        )}
                       </div>
                     )}
 

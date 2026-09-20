@@ -42,6 +42,28 @@ export interface Evidence {
   proposals: Proposal[];
 }
 
+export interface HowToTell {
+  compares: string | null;
+  tell: string[];
+  source: string | null;
+}
+
+export interface Agreement {
+  views: number;
+  agreeing: number;
+  needed: number | null;
+}
+
+export interface PhotoIntegrity {
+  file: string;
+  has_exif: boolean;
+  has_gps: boolean;
+  exif_date: string | null;
+  camera: string | null;
+  camera_location_matches: boolean | null;
+  camera_distance_km: number | null;
+}
+
 export interface CheckResult {
   verdict: Verdict;
   rule: string;
@@ -53,6 +75,14 @@ export interface CheckResult {
   histMonth: number;
   evidence: Evidence;
   report_text?: string;
+  // fields the live backend adds (absent in demo fixtures)
+  sighting_id?: number | null;
+  already_reported?: boolean;
+  duplicate_of?: number | null;
+  sources?: string[];
+  photo_integrity?: PhotoIntegrity[];
+  agreement?: Agreement;
+  how_to_tell?: HowToTell | null;
 }
 
 export interface MkResultOptions {

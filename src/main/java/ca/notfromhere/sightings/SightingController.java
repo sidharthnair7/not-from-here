@@ -5,9 +5,11 @@ import ca.notfromhere.species.SpeciesList;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.Map;
  * GET /api/sightings/{id}         one record with its full evidence snapshot and query URLs
  * GET /api/sightings.geojson      FeatureCollection for any map
  * GET /api/sightings.csv          spreadsheet export
+ * DELETE /api/sightings/{id}      erasure on request
+ * Public coordinates are rounded to about 100 m; the exact position never leaves the database.
  * GET /api/species/{taxonId}/season   Ontario month histogram for a species ("when to look")
  */
 @RestController
@@ -26,6 +30,7 @@ public class SightingController {
     private final SightingService sightings;
     private final SpeciesList speciesList;
     private final RangeLookup rangeLookup;
+    private static final JsonMapper JSON = JsonMapper.builder().build();
 
     public SightingController(SightingService sightings, SpeciesList speciesList, RangeLookup rangeLookup) {
         this.sightings = sightings;
@@ -48,6 +53,11 @@ public class SightingController {
             m.put("photo_sha256", s.getPhotoSha256());
             return ResponseEntity.ok(m);
         }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/api/sightings/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        return sightings.delete(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "/api/sightings.geojson", produces = "application/geo+json")
@@ -82,8 +92,8 @@ public class SightingController {
         m.put("common_name", s.getCommonName());
         m.put("scientific_name", s.getScientificName());
         m.put("inat_taxon_id", s.getTaxonId());
-        m.put("lat", s.getLat());
-        m.put("lng", s.getLng());
+        m.put("lat", SightingService.publicCoord(s.getLat()));
+        m.put("lng", SightingService.publicCoord(s.getLng()));
         m.put("observed_on", s.getObservedOn().toString());
         m.put("reported_at", s.getReportedAt().toString());
         m.put("views_agreeing", s.getViewsAgreeing());
@@ -93,6 +103,16 @@ public class SightingController {
         m.put("gbif_within_50km", s.getGbifWithin50Km());
         m.put("range_source", s.getRangeSource());
         m.put("camera_location_matches", s.getCameraLocationMatches());
+        if (s.getResponseJson() != null) {
+            try {
+                @SuppressWarnings("unchecked")
+                Map<String, Object> result = JSON.readValue(s.getResponseJson(), Map.class);
+                result.put("sighting_id", s.getId());
+                m.put("result", result);
+            } catch (RuntimeException ignored) {
+                // an unreadable stored response leaves the summary without it
+            }
+        }
         return m;
     }
 }

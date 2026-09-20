@@ -47,6 +47,25 @@ public class OllamaProposer implements Proposer {
         return "ollama:" + model;
     }
 
+    /**
+     * Loads the model into memory as soon as the app is up, on a background thread, so the first real check is not
+     * the cold one (a cold load took 10 s on the demo machine and, when Ollama was restarting, failed outright).
+     */
+    @org.springframework.context.event.EventListener(org.springframework.boot.context.event.ApplicationReadyEvent.class)
+    public void warmUp() {
+        Thread.ofVirtual().name("ollama-warmup").start(() -> {
+            try {
+                Map<String, Object> body = Map.of("model", model, "stream", false, "keep_alive", "2h",
+                        "messages", List.of(Map.of("role", "user", "content", "ready?")),
+                        "options", Map.of("num_predict", 1));
+                http.post().uri("/api/chat").contentType(MediaType.APPLICATION_JSON)
+                        .body(json.writeValueAsString(body)).retrieve().body(String.class);
+            } catch (RuntimeException ignored) {
+                // Ollama not up yet; the first check will load the model instead
+            }
+        });
+    }
+
     @Override
     public List<Proposal> propose(byte[] image, String mimeType) {
         String raw = ask(image);
@@ -64,6 +83,7 @@ public class OllamaProposer implements Proposer {
                         "role", "user",
                         "content", catalogue.prompt(),
                         "images", List.of(Base64.getEncoder().encodeToString(image)))),
+                "keep_alive", "2h",
                 "options", Map.of("temperature", 0.0, "seed", 7, "num_predict", 300));
         try {
             String response = http.post().uri("/api/chat")
