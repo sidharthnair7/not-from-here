@@ -28,12 +28,20 @@ public class SpeciesList {
             this.hotline = root.path("hotline").asText();
             List<Species> loaded = new ArrayList<>();
             for (JsonNode n : root.path("species")) {
+                Species.Guide guide = null;
+                JsonNode g = n.path("guide");
+                if (!g.isMissingNode() && !g.isNull()) {
+                    List<String> tell = new ArrayList<>();
+                    for (JsonNode t : g.path("tell")) tell.add(t.asText());
+                    guide = new Species.Guide(g.path("compares").asText(null), List.copyOf(tell), g.path("source").asText(null));
+                }
                 loaded.add(new Species(
                         n.path("commonName").asText(),
                         n.path("scientificName").asText(),
                         n.path("taxonId").asLong(),
                         n.path("kind").asText(),
-                        n.path("lookalike").isNull() ? null : n.path("lookalike").asText()));
+                        n.path("lookalike").isNull() ? null : n.path("lookalike").asText(),
+                        guide));
             }
             this.species = List.copyOf(loaded);
         } catch (IOException e) {

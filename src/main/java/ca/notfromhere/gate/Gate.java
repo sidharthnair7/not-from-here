@@ -68,6 +68,7 @@ public class Gate {
                     Map<String, Object> evidence = new LinkedHashMap<>();
                     evidence.put("proposals", views);
                     evidence.put("agreement", agreement);
+                    guideFor(views, null).ifPresent(g -> evidence.put("howToTell", g));
                     return refuse(Verdict.NOT_VERIFIED_SPLIT, "agreement",
                             String.format("Single view is not confident enough: %.2f for \"%s\" vs %.2f for \"%s\" (needs %.0fx).",
                                     top.confidence(), top.taxonName(), runnerUp.confidence(), runnerUp.taxonName(), SINGLE_PROPOSER_CONFIDENCE_RATIO),
@@ -87,6 +88,7 @@ public class Gate {
                 Map<String, Object> evidence = new LinkedHashMap<>();
                 evidence.put("proposals", views);
                 evidence.put("agreement", agreement);
+                guideFor(views, null).ifPresent(g -> evidence.put("howToTell", g));
                 return refuse(Verdict.NOT_VERIFIED_SPLIT, "agreement",
                         "The views do not agree on the species: " + majority.size() + " of " + views.size()
                                 + " name \"" + majority.get(0).taxonName() + "\" (needs " + needed + ").",
@@ -102,7 +104,9 @@ public class Gate {
             evidence.put("proposal", top);
             evidence.put("proposals", views);
             evidence.put("agreement", agreement);
-            lookalikeOf(top.taxonName()).ifPresent(s -> evidence.put("listedLookalike", s));
+            Optional<Species> listed = lookalikeOf(top.taxonName());
+            listed.ifPresent(s -> evidence.put("listedLookalike", s));
+            guideFor(views, listed.orElse(null)).ifPresent(g -> evidence.put("howToTell", g));
             return refuse(Verdict.NOT_ON_LIST, "list",
                     "\"" + top.taxonName() + "\" is not on the Ontario invasive list.", evidence);
         }
@@ -200,5 +204,23 @@ public class Gate {
 
     private static GateResult refuse(Verdict verdict, String rule, String reason, Map<String, Object> evidence) {
         return new GateResult(verdict, rule, reason, evidence);
+    }
+
+    /**
+     * For a refusal about identity (rules 1 and 2): the guide of the first listed species that appears anywhere in the
+     * candidates, or of the listed species whose lookalike was named. "That's cow parsnip, and here is how giant hogweed
+     * differs" is more useful to a person in a field than the refusal alone.
+     */
+    private Optional<Species.Guide> guideFor(List<List<Proposal>> views, Species listedLookalikeOf) {
+        if (listedLookalikeOf != null && listedLookalikeOf.guide() != null) return Optional.of(listedLookalikeOf.guide());
+        for (List<Proposal> v : views) {
+            for (Proposal p : v) {
+                Optional<Species> sp = resolve(p);
+                if (sp.isPresent() && sp.get().guide() != null) return Optional.of(sp.get().guide());
+                Optional<Species> la = lookalikeOf(p.taxonName());
+                if (la.isPresent() && la.get().guide() != null) return Optional.of(la.get().guide());
+            }
+        }
+        return Optional.empty();
     }
 }

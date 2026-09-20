@@ -25,6 +25,7 @@ Built for NextStep Hacks 2026 ("Earth Forward"), September 19 to 20, 2026.
 - **Photo integrity.** Camera EXIF is read server-side: GPS present, date present, camera, and whether the camera's GPS agrees with the location the user claimed (within 5 km). Evidence, never a refusal.
 - **Batch checks.** `POST /api/check/batch` takes a survey's worth of photos, each its own subject with its own EXIF location and date, and returns every verdict plus a count by verdict.
 - **When to look.** `GET /api/species/{taxonId}/season` returns the Ontario month histogram for a species.
+- **How to tell them apart.** When a refusal is about identity (a split between a listed species and its lookalike, or a native that is often mistaken for a listed one), the response carries `how_to_tell`: the distinguishing features paraphrased from the cited Ontario government or Invading Species Awareness Program page, with the source URL. Seven species have a guide; species without a cited page have none rather than an invented one.
 
 ## API
 
@@ -36,7 +37,7 @@ Built for NextStep Hacks 2026 ("Earth Forward"), September 19 to 20, 2026.
 | `GET /api/species`, `GET /api/species/{taxonId}/season` | The Ontario list and per-species seasonality |
 | `GET /api/health` | Provider and proposers in use |
 
-Real captured responses are in `fixtures/`: `check_report.json`, `check_report_multiview.json`, `check_already_reported.json`, `check_split.json`, `check_insufficient.json`, `check_newrange.json`, `sightings.json`, `sightings.geojson`.
+Real captured responses are in `fixtures/`: `check_report.json`, `check_report_multiview.json`, `check_already_reported.json`, `check_split.json`, `check_split_lookalike_guide.json`, `check_insufficient.json`, `check_newrange.json`, `sightings.json`, `sightings.geojson`.
 
 ## The kill check (why the proposer picks from a catalogue)
 
@@ -89,7 +90,7 @@ src/main/java/ca/notfromhere/
   photo/     PhotoMetadata (EXIF read server-side)
   sightings/ Sighting (JPA), SightingRepository, SightingService (duplicates, exports), SightingController
 src/main/resources/ontario_invasives.json
-src/test/java/ca/notfromhere/gate/GateTest.java            16 unit tests, no network
+src/test/java/ca/notfromhere/gate/GateTest.java            17 unit tests, no network
 src/test/java/ca/notfromhere/proposer/ProposerLiveTest.java the kill check, tagged live
 src/test/resources/photos/                                  10 test photos + extra views + expected.json
 fixtures/   real responses captured from /api/check (report, split, insufficient, new range)

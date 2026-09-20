@@ -3,21 +3,193 @@
   "hotline": "1-800-563-7711",
   "hotlineSource": "https://www.invadingspecies.com/programs/invading-species-reporting/",
   "species": [
-    {"commonName": "Common reed (Phragmites)", "scientificName": "Phragmites australis", "taxonId": 64237, "kind": "plant", "lookalike": "Broadleaf cattail (Typha latifolia)"},
-    {"commonName": "Japanese knotweed", "scientificName": "Reynoutria japonica", "taxonId": 914922, "kind": "plant", "lookalike": null},
-    {"commonName": "Garlic mustard", "scientificName": "Alliaria petiolata", "taxonId": 56061, "kind": "plant", "lookalike": null},
-    {"commonName": "Wild parsnip", "scientificName": "Pastinaca sativa", "taxonId": 59778, "kind": "plant", "lookalike": "Golden alexanders (Zizia aurea)"},
-    {"commonName": "Dog-strangling vine", "scientificName": "Vincetoxicum rossicum", "taxonId": 632667, "kind": "plant", "lookalike": "Common milkweed (Asclepias syriaca)"},
-    {"commonName": "Giant hogweed", "scientificName": "Heracleum mantegazzianum", "taxonId": 130228, "kind": "plant", "lookalike": "Cow parsnip (Heracleum maximum)"},
-    {"commonName": "Purple loosestrife", "scientificName": "Lythrum salicaria", "taxonId": 61321, "kind": "plant", "lookalike": "Fireweed (Chamaenerion angustifolium)"},
-    {"commonName": "Common buckthorn", "scientificName": "Rhamnus cathartica", "taxonId": 54811, "kind": "plant", "lookalike": null},
-    {"commonName": "Tree-of-heaven", "scientificName": "Ailanthus altissima", "taxonId": 57278, "kind": "plant", "lookalike": "Staghorn sumac (Rhus typhina)"},
-    {"commonName": "Emerald ash borer", "scientificName": "Agrilus planipennis", "taxonId": 70057, "kind": "insect", "lookalike": null},
-    {"commonName": "Spotted lanternfly", "scientificName": "Lycorma delicatula", "taxonId": 324726, "kind": "insect", "lookalike": null},
-    {"commonName": "Spongy moth (LDD)", "scientificName": "Lymantria dispar", "taxonId": 47802, "kind": "insect", "lookalike": null},
-    {"commonName": "Asian longhorned beetle", "scientificName": "Anoplophora glabripennis", "taxonId": 128525, "kind": "insect", "lookalike": "Whitespotted sawyer (Monochamus scutellatus)"},
-    {"commonName": "Hemlock woolly adelgid", "scientificName": "Adelges tsugae", "taxonId": 61513, "kind": "insect", "lookalike": null},
-    {"commonName": "Zebra mussel", "scientificName": "Dreissena polymorpha", "taxonId": 116340, "kind": "mollusc", "lookalike": "Quagga mussel (Dreissena bugensis)"},
-    {"commonName": "Round goby", "scientificName": "Neogobius melanostomus", "taxonId": 106743, "kind": "fish", "lookalike": "Mottled sculpin (Cottus bairdii)"}
-  ]
+    {
+      "commonName": "Common reed (Phragmites)",
+      "scientificName": "Phragmites australis",
+      "taxonId": 64237,
+      "kind": "plant",
+      "lookalike": "Broadleaf cattail (Typha latifolia)",
+      "guide": {
+        "compares": "native Phragmites (Phragmites australis subsp. americanus)",
+        "tell": [
+          "Invasive stands are extremely dense, up to 200 stems per square metre; native stands are usually not as dense.",
+          "Invasive stems are tan or beige with blue-green leaves; native stems are more reddish-brown with yellow-green leaves.",
+          "Invasive seedheads are large and dense; native seedheads are smaller and sparser.",
+          "Invasive plants reach up to 5 metres."
+        ],
+        "source": "https://www.invadingspecies.com/invaders/plants/invasive-phragmites/"
+      }
+    },
+    {
+      "commonName": "Japanese knotweed",
+      "scientificName": "Reynoutria japonica",
+      "taxonId": 914922,
+      "kind": "plant",
+      "lookalike": null,
+      "guide": null
+    },
+    {
+      "commonName": "Garlic mustard",
+      "scientificName": "Alliaria petiolata",
+      "taxonId": 56061,
+      "kind": "plant",
+      "lookalike": null,
+      "guide": null
+    },
+    {
+      "commonName": "Wild parsnip",
+      "scientificName": "Pastinaca sativa",
+      "taxonId": 59778,
+      "kind": "plant",
+      "lookalike": "Golden alexanders (Zizia aurea)",
+      "guide": {
+        "compares": "cow parsnip, giant hogweed, Queen Anne's lace, angelica",
+        "tell": [
+          "Wild parsnip: up to 1.5 m, a single smooth green stem 2 to 5 cm thick, yellowish-green flowers in umbrella-shaped clusters 10 to 20 cm across, leaflets sharply toothed and shaped like a mitten.",
+          "Cow parsnip (native): taller, 1 to 2.5 m, white flowers in clusters 10 to 30 cm across, leaves lobed like a hand with fuzzy undersides.",
+          "Giant hogweed: 2.5 to 5 m, hollow stems with purple blotches and coarse bristly hairs, white flower clusters 30 to 90 cm across.",
+          "Queen Anne's lace: 0.3 to 1.5 m, white flower cluster 5 to 10 cm across, finely divided feathery leaves.",
+          "Angelica (native): 1.2 to 2.1 m, greenish-white globe-like flower clusters, smooth purple or purple-blotched stem."
+        ],
+        "source": "https://www.ontario.ca/page/wild-parsnip"
+      }
+    },
+    {
+      "commonName": "Dog-strangling vine",
+      "scientificName": "Vincetoxicum rossicum",
+      "taxonId": 632667,
+      "kind": "plant",
+      "lookalike": "Common milkweed (Asclepias syriaca)",
+      "guide": {
+        "compares": "milkweed (the source describes dog-strangling vine but gives no direct comparison)",
+        "tell": [
+          "A vine that grows 1 to 2 m high by twining onto plants, trees or structures.",
+          "Leaves oval with a pointed tip, 7 to 12 cm long, on opposite sides of the stem.",
+          "Pink to dark purple star-shaped flowers with five petals 5 to 9 mm long.",
+          "Bean-shaped seed pods 4 to 7 cm long that release feathery white seeds in late summer."
+        ],
+        "source": "https://www.ontario.ca/page/dog-strangling-vine"
+      }
+    },
+    {
+      "commonName": "Giant hogweed",
+      "scientificName": "Heracleum mantegazzianum",
+      "taxonId": 130228,
+      "kind": "plant",
+      "lookalike": "Cow parsnip (Heracleum maximum)",
+      "guide": {
+        "compares": "cow parsnip, angelica, Queen Anne's lace",
+        "tell": [
+          "Giant hogweed grows up to 5.5 m; the lookalikes are not as large as a mature plant.",
+          "Thick hollow stems with reddish-purple flecks and stiff hairs filled with sap.",
+          "White flower clusters more widely spaced than Queen Anne's lace, forming a head almost one metre wide."
+        ],
+        "source": "https://www.ontario.ca/page/giant-hogweed"
+      }
+    },
+    {
+      "commonName": "Purple loosestrife",
+      "scientificName": "Lythrum salicaria",
+      "taxonId": 61321,
+      "kind": "plant",
+      "lookalike": "Fireweed (Chamaenerion angustifolium)",
+      "guide": {
+        "compares": "fireweed, blue vervain, blazing stars, native winged and swamp loosestrife (the source names them but gives no direct comparison)",
+        "tell": [
+          "Stems are woody and square; one rhizome can produce 30 to 50 erect stems up to 2.4 m high.",
+          "Leaves opposite or whorled, 3 to 10 cm long, with smooth edges.",
+          "Flowers with five to seven pink-purple petals about 10 mm long on long spikes at the top of the stems; in flower June to early August."
+        ],
+        "source": "https://www.ontario.ca/page/purple-loosestrife"
+      }
+    },
+    {
+      "commonName": "Common buckthorn",
+      "scientificName": "Rhamnus cathartica",
+      "taxonId": 54811,
+      "kind": "plant",
+      "lookalike": null,
+      "guide": null
+    },
+    {
+      "commonName": "Tree-of-heaven",
+      "scientificName": "Ailanthus altissima",
+      "taxonId": 57278,
+      "kind": "plant",
+      "lookalike": "Staghorn sumac (Rhus typhina)",
+      "guide": {
+        "compares": "staghorn sumac, ash, black walnut",
+        "tell": [
+          "Crushed leaves and twigs give off a foul smell (\"stinky sumac\").",
+          "Leaflets have smooth margins except for one or two lobes near the base; native sumac leaflets are toothed.",
+          "Smooth, pale grey bark; clusters of small yellowish-green flowers that become winged samaras."
+        ],
+        "source": "https://www.ontario.ca/page/tree-heaven"
+      }
+    },
+    {
+      "commonName": "Emerald ash borer",
+      "scientificName": "Agrilus planipennis",
+      "taxonId": 70057,
+      "kind": "insect",
+      "lookalike": null,
+      "guide": null
+    },
+    {
+      "commonName": "Spotted lanternfly",
+      "scientificName": "Lycorma delicatula",
+      "taxonId": 324726,
+      "kind": "insect",
+      "lookalike": null,
+      "guide": null
+    },
+    {
+      "commonName": "Spongy moth (LDD)",
+      "scientificName": "Lymantria dispar",
+      "taxonId": 47802,
+      "kind": "insect",
+      "lookalike": null,
+      "guide": null
+    },
+    {
+      "commonName": "Asian longhorned beetle",
+      "scientificName": "Anoplophora glabripennis",
+      "taxonId": 128525,
+      "kind": "insect",
+      "lookalike": "Whitespotted sawyer (Monochamus scutellatus)",
+      "guide": {
+        "compares": "whitespotted sawyer",
+        "tell": [
+          "Asian long-horned beetle: shiny black with prominent, irregular white spots, distinct bluish-white legs, black and white banded antennae, 2 to 4 cm.",
+          "Whitespotted sawyer (native): black with one distinct white spot behind the head, strong reddish legs, plain black antennae, 1 to 3 cm, generally on conifers."
+        ],
+        "source": "https://www.invadingspecies.com/invaders/forest/asian-long-horned-beetle-2/"
+      }
+    },
+    {
+      "commonName": "Hemlock woolly adelgid",
+      "scientificName": "Adelges tsugae",
+      "taxonId": 61513,
+      "kind": "insect",
+      "lookalike": null,
+      "guide": null
+    },
+    {
+      "commonName": "Zebra mussel",
+      "scientificName": "Dreissena polymorpha",
+      "taxonId": 116340,
+      "kind": "mollusc",
+      "lookalike": "Quagga mussel (Dreissena bugensis)",
+      "guide": null
+    },
+    {
+      "commonName": "Round goby",
+      "scientificName": "Neogobius melanostomus",
+      "taxonId": 106743,
+      "kind": "fish",
+      "lookalike": "Mottled sculpin (Cottus bairdii)",
+      "guide": null
+    }
+  ],
+  "guideNote": "guide.tell lines are paraphrased from the cited Ontario government or Invading Species Awareness Program page, fetched 2026-09-19; species without a cited page have no guide."
 }

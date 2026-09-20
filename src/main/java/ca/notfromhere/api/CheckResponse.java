@@ -24,7 +24,8 @@ public record CheckResponse(
         Long duplicate_of,
         List<String> sources,
         List<PhotoIntegrityOut> photo_integrity,
-        AgreementOut agreement) {
+        AgreementOut agreement,
+        ca.notfromhere.species.Species.Guide how_to_tell) {
 
     public record CandidateOut(String taxonName, String common, double confidence) {
     }

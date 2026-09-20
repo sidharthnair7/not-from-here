@@ -186,6 +186,28 @@ class GateTest {
     }
 
     @Test
+    void identityRefusalsCarryASourcedHowToTellGuide() {
+        // wild parsnip vs golden alexanders, the confusion the model actually makes
+        List<List<Proposal>> runs = List.of(
+                List.of(p("Zizia aurea", 0, 0.85, "view1"), p("Pastinaca sativa", 59778, 0.60, "view1")));
+
+        GateResult result = gate.evaluate(runs, PETERBOROUGH_SEPTEMBER);
+
+        assertEquals(Verdict.NOT_VERIFIED_SPLIT, result.verdict());
+        Species.Guide guide = (Species.Guide) result.evidence().get("howToTell");
+        assertNotNull(guide);
+        assertEquals("https://www.ontario.ca/page/wild-parsnip", guide.source());
+        assertTrue(guide.tell().get(0).contains("Wild parsnip"));
+
+        // cow parsnip alone: not on the list, guide comes from the listed lookalike (giant hogweed)
+        GateResult cow = gate.evaluate(List.of(List.of(p("Heracleum maximum", 0, 0.95, "view1"))), PETERBOROUGH_SEPTEMBER);
+        assertEquals(Verdict.NOT_ON_LIST, cow.verdict());
+        Species.Guide hogweed = (Species.Guide) cow.evidence().get("howToTell");
+        assertNotNull(hogweed);
+        assertEquals("https://www.ontario.ca/page/giant-hogweed", hogweed.source());
+    }
+
+    @Test
     void refusesNewRangeWhenNothingWithin200KmAndGivesTheHotline() {
         range.within50 = 0;
         range.within200 = 0;

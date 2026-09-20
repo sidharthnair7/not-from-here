@@ -224,8 +224,10 @@ public class CheckService {
                 : result.reason();
         List<String> sources = ev.get("sources") instanceof List<?> l ? (List<String>) l : List.of();
 
+        Species.Guide howToTell = ev.get("howToTell") instanceof Species.Guide g ? g : null;
+
         return new CheckResponse(verdict.name(), ruleLabel, reason, proposals, trace, nearest, hist, month,
-                evidence, reportText, sightingId, alreadyReported, duplicateOf, sources, integrity, agreement);
+                evidence, reportText, sightingId, alreadyReported, duplicateOf, sources, integrity, agreement, howToTell);
     }
 
     @SuppressWarnings("unchecked")
