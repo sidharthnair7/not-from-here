@@ -15,6 +15,7 @@ export const Header: React.FC = () => {
   const isHome = location.pathname === '/';
   const isCheck = location.pathname === '/check';
   const isRecord = location.pathname === '/record';
+  const isArchive = location.pathname === '/archive';
   const isAbout = location.pathname === '/about';
 
   const navigateWithTransition = (to: string, e: React.MouseEvent) => {
@@ -72,6 +73,13 @@ export const Header: React.FC = () => {
             <span className="ct" id="navct">
               {sightings.length}
             </span>
+          </NavLink>
+          <NavLink
+            to="/archive"
+            onClick={(e) => navigateWithTransition('/archive', e)}
+            aria-current={isArchive ? 'page' : undefined}
+          >
+            {t('nav_archive')}
           </NavLink>
           <NavLink
             to="/about"

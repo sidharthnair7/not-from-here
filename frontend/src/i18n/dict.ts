@@ -25,6 +25,7 @@ export const DICT = {
     nav_home: 'Home',
     nav_check: 'Check',
     nav_record: 'Record',
+    nav_archive: 'Archive',
     nav_about: 'About',
     nav_try_it: 'Try it',
     status_live: 'Live',
@@ -160,6 +161,14 @@ export const DICT = {
     table_verdict: 'Verdict',
     table_where: 'Where',
 
+    // Archive
+    archive_title: 'The Living Archive',
+    archive_sub: 'An infinite 3D specimen constellation of verified invasive sightings in Ontario. Drag to spin the constellation, adjust optical scale, and tap a specimen to inspect its evidence.',
+    archive_zoom: 'Camera zoom',
+    archive_specimens_loaded: 'specimens loaded',
+    archive_inspect_cta: 'Inspect evidence',
+    archive_tap_hint: 'Drag to spin sphere · Tap disc to inspect',
+
     // 404
     notfound_title: 'Page not found',
     notfound_desc: 'The coordinate you followed doesn’t lead to any recorded species.',
@@ -170,6 +179,7 @@ export const DICT = {
     nav_home: 'Accueil',
     nav_check: 'Vérifier',
     nav_record: 'Registre',
+    nav_archive: 'Archives',
     nav_about: 'À propos',
     nav_try_it: 'Essayer',
     status_live: 'En direct',
@@ -304,6 +314,14 @@ export const DICT = {
     table_species: 'Espèce',
     table_verdict: 'Décision',
     table_where: 'Lieu',
+
+    // Archive
+    archive_title: 'Les archives vivantes',
+    archive_sub: 'Une constellation sphérique 3D infinie des signalements d’espèces envahissantes vérifiés en Ontario. Faites glisser pour tourner, réglez le zoom et touchez un spécimen pour examiner ses preuves.',
+    archive_zoom: 'Zoom caméra',
+    archive_specimens_loaded: 'spécimens chargés',
+    archive_inspect_cta: 'Examiner les preuves',
+    archive_tap_hint: 'Faites glisser pour tourner · Touchez pour inspecter',
 
     // 404
     notfound_title: 'Page introuvable',
