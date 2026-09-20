@@ -126,7 +126,7 @@ frontend/   Vite app
 
 ## Prior work disclosure
 
-The record-browsing sphere in the frontend reuses the InfiniteMenu component from our earlier project Remembrance. Everything else was written during the hackathon window.
+The record-browsing sphere is the open-source InfiniteMenu component (React Bits, MIT), which we had used in an earlier project of ours, Remembrance; here it is wired to the live ledger. Everything else was written during the hackathon window.
 
 ## License
 

@@ -28,6 +28,9 @@ export const Check: React.FC = () => {
   } = useStore();
 
   const [searchParams] = useSearchParams();
+  // a refusal at rule 1 or 2 never reached the range lookup; the radar must not show "0" for it
+  const failedAt = result?.evidence?.rule ?? null;
+  const rangeRan = failedAt === null || failedAt >= 3;
   const rightColRef = useRef<HTMLDivElement | null>(null);
   const leftColRef = useRef<HTMLDivElement | null>(null);
 
@@ -204,8 +207,8 @@ export const Check: React.FC = () => {
               lat={lat}
               lng={lng}
               nearest={result?.nearest}
-              count50={result?.evidence?.range?.count_50km ?? null}
-              count200={result?.evidence?.range?.count_200km ?? null}
+              count50={rangeRan ? result?.evidence?.range?.count_50km ?? null : null}
+              count200={rangeRan ? result?.evidence?.range?.count_200km ?? null : null}
             />
 
             <button
@@ -321,8 +324,10 @@ export const Check: React.FC = () => {
                         <span>
                           Evidence{' '}
                           <small>
-                            {(result.proposals || []).length} proposers ·{' '}
-                            {(result.nearest || []).length} nearby records · month histogram
+                            {(result.proposals || []).length} {(result.proposals || []).length === 1 ? 'view' : 'views'} ·{' '}
+                            {rangeRan
+                              ? `${(result.nearest || []).length} nearby records · month histogram`
+                              : `stopped at rule ${failedAt} · range and season not looked up`}
                           </small>
                         </span>
                       </summary>

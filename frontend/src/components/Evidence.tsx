@@ -9,6 +9,11 @@ interface EvidenceProps {
 export const Evidence: React.FC<EvidenceProps> = ({ result }) => {
   const proposals = result.proposals || [];
   const nearest = result.nearest || [];
+  // The rules run in order and stop at the first failure: a refusal at rule 1 or 2 means the range and season
+  // lookups never happened, so their empty numbers must not read as "no records near here".
+  const failedAt = result.evidence?.rule ?? null;
+  const rangeRan = failedAt === null || failedAt >= 3;
+  const seasonRan = failedAt === null || failedAt >= 4;
 
   return (
     <>
@@ -72,12 +77,14 @@ export const Evidence: React.FC<EvidenceProps> = ({ result }) => {
           </div>
         ) : (
           <p className="sub" style={{ margin: 0 }}>
-            No research-grade records within 200 km of this spot.
+            {rangeRan
+              ? 'No research-grade records within 200 km of this spot.'
+              : `Not looked up: the check stopped at rule ${failedAt}, before the range check.`}
           </p>
         )}
       </section>
 
-      {result.hist && (
+      {result.hist && seasonRan && (
         <section>
           <h4>
             Ontario records by month <span className="tag">photo month highlighted</span>
