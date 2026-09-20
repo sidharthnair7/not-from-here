@@ -1,7 +1,7 @@
 {
     "verdict": "REPORT",
     "rule": "All four rules passed",
-    "reason": "Garlic mustard (Alliaria petiolata): 1 of 1 view(s) agree, on the Ontario list, 409 records within 50 km, in season.",
+    "reason": "Garlic mustard (Alliaria petiolata): 1 of 1 view(s) agree, on the Ontario list, 409 records within 50 km, in season. Already reported within 100 m in the last 30 days; see sighting 1.",
     "proposals": [
         {
             "source": "ollama:qwen3.5:9b",
@@ -22,13 +22,13 @@
     "trace": [
         "Single view: Alliaria petiolata 0.95 vs Other 0.05",
         "Alliaria petiolata is on the Ontario list",
-        "409 research-grade records within 50 km, last 3 years. Nearest 1.5 km. GBIF agrees: 327 within 50 km",
+        "409 research-grade records within 50 km, last 3 years. Nearest 1.4 km. GBIF agrees: 327 within 50 km",
         "September: 408 Ontario records"
     ],
     "nearest": [
         {
             "date": "2026-07-04",
-            "distance_km": 1.5,
+            "distance_km": 1.4,
             "place": "Park St N, Peterborough, ON, CA",
             "url": "https://www.inaturalist.org/observations/378184590",
             "lat": 44.3093464619,
@@ -36,7 +36,7 @@
         },
         {
             "date": "2026-05-24",
-            "distance_km": 1.5,
+            "distance_km": 1.4,
             "place": "Sutherland Pl, Peterborough, ON, CA",
             "url": "https://www.inaturalist.org/observations/364884007",
             "lat": 44.3110753376,
@@ -166,7 +166,7 @@
                 {
                     "id": 378184590,
                     "observedOn": "2026-07-04",
-                    "distanceKm": 1.5,
+                    "distanceKm": 1.4,
                     "lat": 44.3093464619,
                     "lng": -78.3328967354,
                     "place": "Park St N, Peterborough, ON, CA",
@@ -175,7 +175,7 @@
                 {
                     "id": 364884007,
                     "observedOn": "2026-05-24",
-                    "distanceKm": 1.5,
+                    "distanceKm": 1.4,
                     "lat": 44.3110753376,
                     "lng": -78.3101745747,
                     "place": "Sutherland Pl, Peterborough, ON, CA",
@@ -215,11 +215,11 @@
                 "within50Km": 327
             },
             "sources": [
-                "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3000&lng=-78.3200&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
-                "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3000&lng=-78.3200&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
+                "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3002&lng=-78.3201&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
+                "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3002&lng=-78.3201&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
                 "https://api.gbif.org/v1/species/match?name=Alliaria%20petiolata",
-                "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3000,-78.3200,50km&year=2023,2026&limit=1",
-                "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3000,-78.3200,200km&year=2023,2026&limit=1",
+                "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3002,-78.3201,50km&year=2023,2026&limit=1",
+                "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3002,-78.3201,200km&year=2023,2026&limit=1",
                 "https://api.inaturalist.org/v1/observations/histogram?interval=month_of_year&taxon_id=56061&place_id=6883"
             ],
             "month": 9,
@@ -239,22 +239,22 @@
             },
             "seasonDataAvailable": true,
             "photo": {
-                "lat": 44.3,
-                "lng": -78.32,
+                "lat": 44.3002,
+                "lng": -78.3201,
                 "takenAt": "2026-09-19"
             }
         }
     },
-    "report_text": "Suspected invasive species report\n\nSpecies: Alliaria petiolata (Garlic mustard)\nObserved: 2026-09-19 at 44.300, -78.320\nIdentification: one view, top candidate at least 2x its runner-up.\nListed as invasive in Ontario.\nNearby records: 409 research-grade iNaturalist observations within 50 km in the last 3 years; nearest 1.5 km (2026-07-04); GBIF: 327 occurrences within 50 km.\nSeason: recorded in Ontario in September.\n\nDrafted from the gate's evidence only. Please check before sending.",
+    "report_text": "Suspected invasive species report\n\nSpecies: Alliaria petiolata (Garlic mustard)\nObserved: 2026-09-19 at 44.300, -78.320\nIdentification: one view, top candidate at least 2x its runner-up.\nListed as invasive in Ontario.\nNearby records: 409 research-grade iNaturalist observations within 50 km in the last 3 years; nearest 1.4 km (2026-07-04); GBIF: 327 occurrences within 50 km.\nSeason: recorded in Ontario in September.\n\nDrafted from the gate's evidence only. Please check before sending.",
     "sighting_id": 1,
-    "already_reported": false,
-    "duplicate_of": null,
+    "already_reported": true,
+    "duplicate_of": 1,
     "sources": [
-        "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3000&lng=-78.3200&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
-        "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3000&lng=-78.3200&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
+        "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3002&lng=-78.3201&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
+        "https://api.inaturalist.org/v1/observations?taxon_id=56061&lat=44.3002&lng=-78.3201&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
         "https://api.gbif.org/v1/species/match?name=Alliaria%20petiolata",
-        "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3000,-78.3200,50km&year=2023,2026&limit=1",
-        "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3000,-78.3200,200km&year=2023,2026&limit=1",
+        "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3002,-78.3201,50km&year=2023,2026&limit=1",
+        "https://api.gbif.org/v1/occurrence/search?taxonKey=3050645&geoDistance=44.3002,-78.3201,200km&year=2023,2026&limit=1",
         "https://api.inaturalist.org/v1/observations/histogram?interval=month_of_year&taxon_id=56061&place_id=6883"
     ],
     "photo_integrity": [

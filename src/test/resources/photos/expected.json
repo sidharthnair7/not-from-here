@@ -81,5 +81,36 @@
       "photoLicense": "cc-by-nc",
       "attribution": "(c) Caroline Heise, some rights reserved (CC BY-NC)"
     }
-  ]
+  ],
+  "extra_views": {
+    "note": "Additional photos of the SAME observation (same plant or animal, different angle) for multi-view checks.",
+    "photos": {
+      "garlic_mustard": [],
+      "phragmites": [
+        {
+          "file": "phragmites_view2.jpg",
+          "license": "cc-by-nc",
+          "attribution": "(c) Patrick Kramer, some rights reserved (CC BY-NC)"
+        },
+        {
+          "file": "phragmites_view3.jpg",
+          "license": "cc-by-nc",
+          "attribution": "(c) Patrick Kramer, some rights reserved (CC BY-NC)"
+        }
+      ],
+      "knotweed": [
+        {
+          "file": "knotweed_view2.jpg",
+          "license": "cc-by-nc",
+          "attribution": "(c) leeanardo, some rights reserved (CC BY-NC)"
+        },
+        {
+          "file": "knotweed_view3.jpg",
+          "license": "cc-by-nc",
+          "attribution": "(c) leeanardo, some rights reserved (CC BY-NC)"
+        }
+      ],
+      "lanternfly": []
+    }
+  }
 }

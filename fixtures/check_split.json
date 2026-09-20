@@ -1,7 +1,7 @@
 {
     "verdict": "NOT_VERIFIED_SPLIT",
     "rule": "Decided by rule 1: proposal agreement",
-    "reason": "Single proposer is not confident enough: 0.90 for \"Phragmites australis\" vs 0.60 for \"Typha latifolia\" (needs 2x).",
+    "reason": "Single view is not confident enough: 0.90 for \"Phragmites australis\" vs 0.60 for \"Typha latifolia\" (needs 2x).",
     "proposals": [
         {
             "source": "ollama:qwen3.5:9b",
@@ -25,7 +25,7 @@
         }
     ],
     "trace": [
-        "Single proposer is not confident enough: 0.90 for \"Phragmites australis\" vs 0.60 for \"Typha latifolia\" (needs 2x).",
+        "Single view is not confident enough: 0.90 for \"Phragmites australis\" vs 0.60 for \"Typha latifolia\" (needs 2x).",
         null,
         null,
         null
@@ -56,7 +56,10 @@
             "radius_km": 50,
             "window_years": 3,
             "count_50km": 0,
-            "count_200km": 0
+            "count_200km": 0,
+            "source": "",
+            "gbif_50km": null,
+            "gbif_200km": null
         },
         "season": {
             "month": 9,
@@ -119,8 +122,32 @@
                         "source": "ollama:qwen3.5:9b"
                     }
                 ]
-            ]
+            ],
+            "agreement": {
+                "views": 1,
+                "agreeing": 1
+            }
         }
     },
-    "report_text": null
+    "report_text": null,
+    "sighting_id": null,
+    "already_reported": false,
+    "duplicate_of": null,
+    "sources": [],
+    "photo_integrity": [
+        {
+            "file": "phragmites.jpg",
+            "has_exif": false,
+            "has_gps": false,
+            "exif_date": null,
+            "camera": null,
+            "camera_location_matches": null,
+            "camera_distance_km": null
+        }
+    ],
+    "agreement": {
+        "views": 1,
+        "agreeing": 1,
+        "needed": null
+    }
 }

@@ -1,0 +1,435 @@
+{
+    "verdict": "REPORT",
+    "rule": "All four rules passed",
+    "reason": "Common reed (Phragmites) (Phragmites australis): 3 of 3 view(s) agree, on the Ontario list, 222 records within 50 km, in season.",
+    "proposals": [
+        {
+            "source": "ollama:qwen3.5:9b#view1",
+            "list": [
+                {
+                    "taxonName": "Phragmites australis",
+                    "common": "Common reed (Phragmites)",
+                    "confidence": 0.9
+                },
+                {
+                    "taxonName": "Typha latifolia",
+                    "common": null,
+                    "confidence": 0.6
+                },
+                {
+                    "taxonName": "Other",
+                    "common": null,
+                    "confidence": 0.3
+                }
+            ]
+        },
+        {
+            "source": "ollama:qwen3.5:9b#view2",
+            "list": [
+                {
+                    "taxonName": "Phragmites australis",
+                    "common": "Common reed (Phragmites)",
+                    "confidence": 0.95
+                },
+                {
+                    "taxonName": "Typha latifolia",
+                    "common": null,
+                    "confidence": 0.75
+                },
+                {
+                    "taxonName": "Other",
+                    "common": null,
+                    "confidence": 0.1
+                }
+            ]
+        },
+        {
+            "source": "ollama:qwen3.5:9b#view3",
+            "list": [
+                {
+                    "taxonName": "Phragmites australis",
+                    "common": "Common reed (Phragmites)",
+                    "confidence": 0.9
+                },
+                {
+                    "taxonName": "Typha latifolia",
+                    "common": null,
+                    "confidence": 0.6
+                }
+            ]
+        }
+    ],
+    "trace": [
+        "3 of 3 views name Phragmites australis",
+        "Phragmites australis is on the Ontario list",
+        "222 research-grade records within 50 km, last 3 years. Nearest 1.7 km. GBIF agrees: 191 within 50 km",
+        "September: 1628 Ontario records"
+    ],
+    "nearest": [
+        {
+            "date": "2026-05-25",
+            "distance_km": 1.7,
+            "place": "Peterborough, ON, Canada",
+            "url": "https://www.inaturalist.org/observations/365211678",
+            "lat": 44.298912047,
+            "lng": -78.2990726536
+        },
+        {
+            "date": "2026-03-30",
+            "distance_km": 2.7,
+            "place": "Raymond St, Peterborough, ON, CA",
+            "url": "https://www.inaturalist.org/observations/349072427",
+            "lat": 44.3209113647,
+            "lng": -78.3362868615
+        },
+        {
+            "date": "2026-05-04",
+            "distance_km": 2.8,
+            "place": "Barnardo at Clark, Peterborough, ON K9H 5X1, Canada",
+            "url": "https://www.inaturalist.org/observations/358307111",
+            "lat": 44.3243243,
+            "lng": -78.3286783
+        },
+        {
+            "date": "2026-04-24",
+            "distance_km": 3.3,
+            "place": "Milroy at Evans, Peterborough, ON K9H 7T3, Canada",
+            "url": "https://www.inaturalist.org/observations/353818100",
+            "lat": 44.3283305556,
+            "lng": -78.3314305556
+        },
+        {
+            "date": "2026-08-16",
+            "distance_km": 4.6,
+            "place": "1369 Hilliard St, Peterborough, ON K9J 6X5, Canada",
+            "url": "https://www.inaturalist.org/observations/391915847",
+            "lat": 44.3401716667,
+            "lng": -78.335005
+        }
+    ],
+    "hist": [
+        380,
+        503,
+        583,
+        891,
+        828,
+        1002,
+        1655,
+        2266,
+        1628,
+        917,
+        1030,
+        375
+    ],
+    "histMonth": 9,
+    "evidence": {
+        "rule": null,
+        "taxon": {
+            "name": "Phragmites australis",
+            "list_member": true
+        },
+        "range": {
+            "radius_km": 50,
+            "window_years": 3,
+            "count_50km": 222,
+            "count_200km": 4146,
+            "source": "inaturalist",
+            "gbif_50km": 191,
+            "gbif_200km": 4133
+        },
+        "season": {
+            "month": 9,
+            "histogram": [
+                380,
+                503,
+                583,
+                891,
+                828,
+                1002,
+                1655,
+                2266,
+                1628,
+                917,
+                1030,
+                375
+            ]
+        },
+        "proposals": [
+            {
+                "source": "ollama:qwen3.5:9b#view1",
+                "list": [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "common": "Common reed (Phragmites)",
+                        "confidence": 0.9
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "common": null,
+                        "confidence": 0.6
+                    },
+                    {
+                        "taxonName": "Other",
+                        "common": null,
+                        "confidence": 0.3
+                    }
+                ]
+            },
+            {
+                "source": "ollama:qwen3.5:9b#view2",
+                "list": [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "common": "Common reed (Phragmites)",
+                        "confidence": 0.95
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "common": null,
+                        "confidence": 0.75
+                    },
+                    {
+                        "taxonName": "Other",
+                        "common": null,
+                        "confidence": 0.1
+                    }
+                ]
+            },
+            {
+                "source": "ollama:qwen3.5:9b#view3",
+                "list": [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "common": "Common reed (Phragmites)",
+                        "confidence": 0.9
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "common": null,
+                        "confidence": 0.6
+                    }
+                ]
+            }
+        ],
+        "raw": {
+            "species": {
+                "commonName": "Common reed (Phragmites)",
+                "scientificName": "Phragmites australis",
+                "taxonId": 64237,
+                "kind": "plant",
+                "lookalike": "Broadleaf cattail (Typha latifolia)"
+            },
+            "proposals": [
+                [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "taxonId": 64237,
+                        "confidence": 0.9,
+                        "source": "ollama:qwen3.5:9b#view1"
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "taxonId": 0,
+                        "confidence": 0.6,
+                        "source": "ollama:qwen3.5:9b#view1"
+                    },
+                    {
+                        "taxonName": "Other",
+                        "taxonId": 0,
+                        "confidence": 0.3,
+                        "source": "ollama:qwen3.5:9b#view1"
+                    }
+                ],
+                [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "taxonId": 64237,
+                        "confidence": 0.95,
+                        "source": "ollama:qwen3.5:9b#view2"
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "taxonId": 0,
+                        "confidence": 0.75,
+                        "source": "ollama:qwen3.5:9b#view2"
+                    },
+                    {
+                        "taxonName": "Other",
+                        "taxonId": 0,
+                        "confidence": 0.1,
+                        "source": "ollama:qwen3.5:9b#view2"
+                    }
+                ],
+                [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "taxonId": 64237,
+                        "confidence": 0.9,
+                        "source": "ollama:qwen3.5:9b#view3"
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "taxonId": 0,
+                        "confidence": 0.6,
+                        "source": "ollama:qwen3.5:9b#view3"
+                    }
+                ]
+            ],
+            "agreement": {
+                "views": 3,
+                "agreeing": 3,
+                "needed": 2,
+                "topPicks": [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "taxonId": 64237,
+                        "confidence": 0.9,
+                        "source": "ollama:qwen3.5:9b#view1"
+                    },
+                    {
+                        "taxonName": "Phragmites australis",
+                        "taxonId": 64237,
+                        "confidence": 0.95,
+                        "source": "ollama:qwen3.5:9b#view2"
+                    },
+                    {
+                        "taxonName": "Phragmites australis",
+                        "taxonId": 64237,
+                        "confidence": 0.9,
+                        "source": "ollama:qwen3.5:9b#view3"
+                    }
+                ]
+            },
+            "rangeSource": "inaturalist",
+            "within50Km": 222,
+            "within200Km": 4146,
+            "nearest": [
+                {
+                    "id": 365211678,
+                    "observedOn": "2026-05-25",
+                    "distanceKm": 1.7,
+                    "lat": 44.298912047,
+                    "lng": -78.2990726536,
+                    "place": "Peterborough, ON, Canada",
+                    "url": "https://www.inaturalist.org/observations/365211678"
+                },
+                {
+                    "id": 349072427,
+                    "observedOn": "2026-03-30",
+                    "distanceKm": 2.7,
+                    "lat": 44.3209113647,
+                    "lng": -78.3362868615,
+                    "place": "Raymond St, Peterborough, ON, CA",
+                    "url": "https://www.inaturalist.org/observations/349072427"
+                },
+                {
+                    "id": 358307111,
+                    "observedOn": "2026-05-04",
+                    "distanceKm": 2.8,
+                    "lat": 44.3243243,
+                    "lng": -78.3286783,
+                    "place": "Barnardo at Clark, Peterborough, ON K9H 5X1, Canada",
+                    "url": "https://www.inaturalist.org/observations/358307111"
+                },
+                {
+                    "id": 353818100,
+                    "observedOn": "2026-04-24",
+                    "distanceKm": 3.3,
+                    "lat": 44.3283305556,
+                    "lng": -78.3314305556,
+                    "place": "Milroy at Evans, Peterborough, ON K9H 7T3, Canada",
+                    "url": "https://www.inaturalist.org/observations/353818100"
+                },
+                {
+                    "id": 391915847,
+                    "observedOn": "2026-08-16",
+                    "distanceKm": 4.6,
+                    "lat": 44.3401716667,
+                    "lng": -78.335005,
+                    "place": "1369 Hilliard St, Peterborough, ON K9J 6X5, Canada",
+                    "url": "https://www.inaturalist.org/observations/391915847"
+                }
+            ],
+            "gbif": {
+                "within200Km": 4133,
+                "taxonKey": 2705783,
+                "within50Km": 191
+            },
+            "sources": [
+                "https://api.inaturalist.org/v1/observations?taxon_id=64237&lat=44.3000&lng=-78.3200&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
+                "https://api.inaturalist.org/v1/observations?taxon_id=64237&lat=44.3000&lng=-78.3200&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
+                "https://api.gbif.org/v1/species/match?name=Phragmites%20australis",
+                "https://api.gbif.org/v1/occurrence/search?taxonKey=2705783&geoDistance=44.3000,-78.3200,50km&year=2023,2026&limit=1",
+                "https://api.gbif.org/v1/occurrence/search?taxonKey=2705783&geoDistance=44.3000,-78.3200,200km&year=2023,2026&limit=1",
+                "https://api.inaturalist.org/v1/observations/histogram?interval=month_of_year&taxon_id=64237&place_id=6883"
+            ],
+            "month": 9,
+            "histogram": {
+                "1": 380,
+                "2": 503,
+                "3": 583,
+                "4": 891,
+                "5": 828,
+                "6": 1002,
+                "7": 1655,
+                "8": 2266,
+                "9": 1628,
+                "10": 917,
+                "11": 1030,
+                "12": 375
+            },
+            "seasonDataAvailable": true,
+            "photo": {
+                "lat": 44.3,
+                "lng": -78.32,
+                "takenAt": "2026-09-19"
+            }
+        }
+    },
+    "report_text": "Suspected invasive species report\n\nSpecies: Phragmites australis (Common reed (Phragmites))\nObserved: 2026-09-19 at 44.300, -78.320\nIdentification: 3 of 3 independent views agreed.\nListed as invasive in Ontario.\nNearby records: 222 research-grade iNaturalist observations within 50 km in the last 3 years; nearest 1.7 km (2026-05-25); GBIF: 191 occurrences within 50 km.\nSeason: recorded in Ontario in September.\n\nDrafted from the gate's evidence only. Please check before sending.",
+    "sighting_id": 2,
+    "already_reported": false,
+    "duplicate_of": null,
+    "sources": [
+        "https://api.inaturalist.org/v1/observations?taxon_id=64237&lat=44.3000&lng=-78.3200&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
+        "https://api.inaturalist.org/v1/observations?taxon_id=64237&lat=44.3000&lng=-78.3200&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
+        "https://api.gbif.org/v1/species/match?name=Phragmites%20australis",
+        "https://api.gbif.org/v1/occurrence/search?taxonKey=2705783&geoDistance=44.3000,-78.3200,50km&year=2023,2026&limit=1",
+        "https://api.gbif.org/v1/occurrence/search?taxonKey=2705783&geoDistance=44.3000,-78.3200,200km&year=2023,2026&limit=1",
+        "https://api.inaturalist.org/v1/observations/histogram?interval=month_of_year&taxon_id=64237&place_id=6883"
+    ],
+    "photo_integrity": [
+        {
+            "file": "phragmites.jpg",
+            "has_exif": false,
+            "has_gps": false,
+            "exif_date": null,
+            "camera": null,
+            "camera_location_matches": null,
+            "camera_distance_km": null
+        },
+        {
+            "file": "phragmites_view2.jpg",
+            "has_exif": false,
+            "has_gps": false,
+            "exif_date": null,
+            "camera": null,
+            "camera_location_matches": null,
+            "camera_distance_km": null
+        },
+        {
+            "file": "phragmites_view3.jpg",
+            "has_exif": false,
+            "has_gps": false,
+            "exif_date": null,
+            "camera": null,
+            "camera_location_matches": null,
+            "camera_distance_km": null
+        }
+    ],
+    "agreement": {
+        "views": 3,
+        "agreeing": 3,
+        "needed": 2
+    }
+}

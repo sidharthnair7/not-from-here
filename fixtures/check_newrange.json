@@ -20,7 +20,7 @@
         }
     ],
     "trace": [
-        "Single proposer: Lycorma delicatula 0.95 vs Other 0.05",
+        "Single view: Lycorma delicatula 0.95 vs Other 0.05",
         "Lycorma delicatula is on the Ontario list",
         "No research-grade record of Spotted lanternfly within 200 km in the last 3 years. Not auto-reported; call the Invading Species Hotline.",
         null
@@ -51,7 +51,10 @@
             "radius_km": 50,
             "window_years": 3,
             "count_50km": 0,
-            "count_200km": 0
+            "count_200km": 0,
+            "source": "inaturalist",
+            "gbif_50km": 11825,
+            "gbif_200km": 33982
         },
         "season": {
             "month": 9,
@@ -95,11 +98,70 @@
                 "kind": "insect",
                 "lookalike": null
             },
+            "proposals": [
+                [
+                    {
+                        "taxonName": "Lycorma delicatula",
+                        "taxonId": 324726,
+                        "confidence": 0.95,
+                        "source": "ollama:qwen3.5:9b"
+                    },
+                    {
+                        "taxonName": "Other",
+                        "taxonId": 0,
+                        "confidence": 0.05,
+                        "source": "ollama:qwen3.5:9b"
+                    }
+                ]
+            ],
+            "agreement": {
+                "views": 1,
+                "agreeing": 1
+            },
+            "rangeSource": "inaturalist",
             "within50Km": 0,
             "within200Km": 0,
             "nearest": [],
+            "gbif": {
+                "within200Km": 33982,
+                "within50Km": 11825,
+                "taxonKey": 54
+            },
+            "sources": [
+                "https://api.inaturalist.org/v1/observations?taxon_id=324726&lat=48.3800&lng=-89.2500&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
+                "https://api.inaturalist.org/v1/observations?taxon_id=324726&lat=48.3800&lng=-89.2500&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
+                "https://api.gbif.org/v1/species/match?name=Lycorma%20delicatula",
+                "https://api.gbif.org/v1/occurrence/search?taxonKey=54&geoDistance=48.3800,-89.2500,50km&year=2023,2026&limit=1",
+                "https://api.gbif.org/v1/occurrence/search?taxonKey=54&geoDistance=48.3800,-89.2500,200km&year=2023,2026&limit=1"
+            ],
             "hotline": "1-800-563-7711"
         }
     },
-    "report_text": null
+    "report_text": null,
+    "sighting_id": null,
+    "already_reported": false,
+    "duplicate_of": null,
+    "sources": [
+        "https://api.inaturalist.org/v1/observations?taxon_id=324726&lat=48.3800&lng=-89.2500&radius=50&quality_grade=research&d1=2023-09-01&per_page=50&order_by=observed_on",
+        "https://api.inaturalist.org/v1/observations?taxon_id=324726&lat=48.3800&lng=-89.2500&radius=200&quality_grade=research&d1=2023-09-01&per_page=1",
+        "https://api.gbif.org/v1/species/match?name=Lycorma%20delicatula",
+        "https://api.gbif.org/v1/occurrence/search?taxonKey=54&geoDistance=48.3800,-89.2500,50km&year=2023,2026&limit=1",
+        "https://api.gbif.org/v1/occurrence/search?taxonKey=54&geoDistance=48.3800,-89.2500,200km&year=2023,2026&limit=1"
+    ],
+    "photo_integrity": [
+        {
+            "file": "lanternfly.jpg",
+            "has_exif": false,
+            "has_gps": false,
+            "exif_date": null,
+            "camera": null,
+            "camera_location_matches": null,
+            "camera_distance_km": null
+        }
+    ],
+    "agreement": {
+        "views": 1,
+        "agreeing": 1,
+        "needed": null
+    }
 }

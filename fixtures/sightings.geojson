@@ -1,0 +1,55 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "properties": {
+                "id": 2,
+                "common_name": "Common reed (Phragmites)",
+                "scientific_name": "Phragmites australis",
+                "inat_taxon_id": 64237,
+                "observed_on": "2026-09-19",
+                "reported_at": "2026-09-20T00:46:35.381423Z",
+                "views_agreeing": 3,
+                "views_total": 3,
+                "records_within_50km": 222,
+                "records_within_200km": 4146,
+                "gbif_within_50km": 191,
+                "range_source": "inaturalist",
+                "camera_location_matches": null
+            },
+            "geometry": {
+                "coordinates": [
+                    -78.32,
+                    44.3
+                ],
+                "type": "Point"
+            },
+            "type": "Feature"
+        },
+        {
+            "properties": {
+                "id": 1,
+                "common_name": "Garlic mustard",
+                "scientific_name": "Alliaria petiolata",
+                "inat_taxon_id": 56061,
+                "observed_on": "2026-09-19",
+                "reported_at": "2026-09-20T00:46:30.973452Z",
+                "views_agreeing": 1,
+                "views_total": 1,
+                "records_within_50km": 409,
+                "records_within_200km": 6103,
+                "gbif_within_50km": 327,
+                "range_source": "inaturalist",
+                "camera_location_matches": null
+            },
+            "geometry": {
+                "coordinates": [
+                    -78.32,
+                    44.3
+                ],
+                "type": "Point"
+            },
+            "type": "Feature"
+        }
+    ]
+}

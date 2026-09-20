@@ -15,6 +15,29 @@ Built for NextStep Hacks 2026 ("Earth Forward"), September 19 to 20, 2026.
 | 3 | Range | At least 3 research-grade iNaturalist records within 50 km in the last 3 years | `INSUFFICIENT_RECORDS`; zero within 200 km is `NEW_RANGE`, routed to the Invading Species Hotline |
 | 4 | Season | The photo's month has a non-zero count in the Ontario month histogram | `OUT_OF_SEASON` |
 
+## What it does beyond one photo, one verdict
+
+- **Multi-view identification.** Send up to three photos of the same subject (`photos` field). Each view is an independent proposal and rule 1 needs at least two thirds of them, never fewer than two, to name the same species. A single Phragmites photo splits 0.90 vs 0.60 against cattail; three views of the same plant agree 3 of 3 and pass.
+- **Independent corroboration.** The range rule is decided by iNaturalist research-grade records and corroborated by GBIF, reached by scientific name. If iNaturalist is unreachable, GBIF decides and the evidence says so. If neither can be reached, nothing is reported.
+- **Provenance.** Every response carries the exact query URLs (iNaturalist, GBIF, the month histogram) it was decided from, so a hotline operator can open them and see the same counts.
+- **A shared ledger.** Every REPORT is stored with its evidence snapshot: `GET /api/sightings`, `GET /api/sightings/{id}`, `GET /api/sightings.geojson`, `GET /api/sightings.csv`.
+- **Duplicate detection.** The same species within 100 m in the last 30 days is answered with the existing record (`already_reported`, `duplicate_of`) instead of a second report.
+- **Photo integrity.** Camera EXIF is read server-side: GPS present, date present, camera, and whether the camera's GPS agrees with the location the user claimed (within 5 km). Evidence, never a refusal.
+- **Batch checks.** `POST /api/check/batch` takes a survey's worth of photos, each its own subject with its own EXIF location and date, and returns every verdict plus a count by verdict.
+- **When to look.** `GET /api/species/{taxonId}/season` returns the Ontario month histogram for a species.
+
+## API
+
+| Call | Purpose |
+|------|---------|
+| `POST /api/check` multipart `photo` or `photos` (up to 3), optional `lat`, `lng`, `taken_at` | One subject, one verdict, full evidence |
+| `POST /api/check/batch` multipart `photos` (up to 50), optional `lat`, `lng` | Many subjects, one table |
+| `GET /api/sightings`, `/api/sightings/{id}`, `/api/sightings.geojson`, `/api/sightings.csv` | The verified ledger and exports |
+| `GET /api/species`, `GET /api/species/{taxonId}/season` | The Ontario list and per-species seasonality |
+| `GET /api/health` | Provider and proposers in use |
+
+Real captured responses are in `fixtures/`: `check_report.json`, `check_report_multiview.json`, `check_already_reported.json`, `check_split.json`, `check_insufficient.json`, `check_newrange.json`, `sightings.json`, `sightings.geojson`.
+
 ## The kill check (why the proposer picks from a catalogue)
 
 Before writing the proposer we tested the local model on ten research-grade iNaturalist photos, one per species (`src/test/resources/photos/`, licences in `expected.json`).
@@ -46,7 +69,7 @@ Frontend, in a second terminal (Vite proxies `/api` to port 8080):
 cd frontend && npm install && npm run dev
 ```
 
-`POST /api/check` takes multipart `photo`, optional `lat`, `lng`, `taken_at`. Every response carries the gate's raw evidence.
+Every response carries the gate's raw evidence and the query URLs it was decided from.
 
 Tests (no network, no model):
 
@@ -58,15 +81,17 @@ mvn test
 
 ```
 src/main/java/ca/notfromhere/
-  api/       CheckController (POST /api/check, GET /api/health, GET /api/species), CheckService, CheckResponse
-  gate/      Gate.java (the four rules), Verdict, Proposal, PhotoMeta, GateResult, RangeLookup
+  api/       CheckController, CheckService (views, EXIF, ledger, response mapping), CheckResponse
+  gate/      Gate.java (the four rules), Verdict, Proposal, PhotoMeta, GateResult, RangeLookup, OccurrenceLookup
   proposer/  Proposer, Catalogue, OllamaProposer
   species/   Species, SpeciesList (loads ontario_invasives.json)
-  inat/      INatClient (iNaturalist calls + disk cache; implements RangeLookup)
+  inat/      INatClient, GbifClient, CachedHttp (disk cache keyed by URL)
+  photo/     PhotoMetadata (EXIF read server-side)
+  sightings/ Sighting (JPA), SightingRepository, SightingService (duplicates, exports), SightingController
 src/main/resources/ontario_invasives.json
-src/test/java/ca/notfromhere/gate/GateTest.java            11 unit tests, no network
+src/test/java/ca/notfromhere/gate/GateTest.java            16 unit tests, no network
 src/test/java/ca/notfromhere/proposer/ProposerLiveTest.java the kill check, tagged live
-src/test/resources/photos/                                  10 test photos + expected.json
+src/test/resources/photos/                                  10 test photos + extra views + expected.json
 fixtures/   real responses captured from /api/check (report, split, insufficient, new range)
 frontend/   Vite app
 ```
