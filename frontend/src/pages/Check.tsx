@@ -151,6 +151,10 @@ export const Check: React.FC = () => {
           <div className="card" id="left" ref={leftColRef}>
             <h2>Your sighting</h2>
             <p className="sub">Drop a photo, or try one of the demo photos.</p>
+            <p className="honesty" data-testid="honesty">
+              Our model is right about 6 times in 10 on our test set. That is why nothing is reported on its
+              word alone: four rules decide, and the first one that fails stops the report.
+            </p>
 
             <PhotoFrame />
 

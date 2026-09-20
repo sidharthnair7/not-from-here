@@ -86,6 +86,42 @@ export const Evidence: React.FC<EvidenceProps> = ({ result }) => {
         </section>
       )}
 
+      {result.sources && result.sources.length > 0 && (
+        <section data-testid="sources">
+          <h4>
+            Queries this verdict was decided from <span className="tag">open one, you see the same counts</span>
+          </h4>
+          <ol className="sources">
+            {result.sources.map((u, i) => {
+              let label = u;
+              try {
+                const url = new URL(u);
+                const host = url.hostname.replace('api.', '');
+                const what = url.pathname.includes('histogram')
+                  ? 'month histogram'
+                  : url.pathname.includes('species/match')
+                  ? 'species match'
+                  : url.searchParams.get('radius')
+                  ? `records within ${url.searchParams.get('radius')} km`
+                  : (url.searchParams.get('geoDistance') || '').split(',')[2]
+                  ? `occurrences within ${(url.searchParams.get('geoDistance') || '').split(',')[2]}`
+                  : url.pathname;
+                label = `${host}: ${what}`;
+              } catch {
+                // keep the raw URL as the label
+              }
+              return (
+                <li key={i}>
+                  <a href={u} target="_blank" rel="noopener noreferrer">
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      )}
+
       <section>
         <h4>Raw evidence</h4>
         <pre className="json">{JSON.stringify(result.evidence || {}, null, 2)}</pre>

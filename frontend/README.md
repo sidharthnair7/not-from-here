@@ -162,19 +162,13 @@ When reachable, the UI displays `LIVE SENTINEL` in emerald green. When unreachab
 
 ---
 
-## Performance & Self-Audit Matrix
+## Tests and budgets
 
-| Metric / Audit | Budget / Target | Measured Result | Status |
-|---|---|---|---|
-| **Initial Gzipped JS** | < 150 kB | **115.03 kB** | PASSED |
-| **Initial Gzipped CSS** | < 25 kB | **8.43 kB** | PASSED |
-| **Largest Contentful Paint (LCP)** | < 2.0s | ~0.8s | PASSED |
-| **Cumulative Layout Shift (CLS)** | < 0.05 | 0.00 | PASSED |
-| **Interaction to Next Paint (INP)** | < 100ms | < 30ms | PASSED |
-| **WCAG Accessibility** | AA+ (4.5:1 contrast) | Full contrast & ARIA | PASSED |
-| **Offscreen CPU Conservation** | 0% idle canvas | Pauses offscreen / tab hidden | PASSED |
-| **Reduced Motion** | Disables transforms | Checked via media query | PASSED |
-| **Unit & Integration Tests** | 100% pass | 14 passed (4 suites) | PASSED |
+- `npx vitest run`: 18 tests in 5 suites (format, rng, mkResult, the check flow, the archive flow).
+- `npx tsc --noEmit`: clean.
+- Production bundle, measured with `vite build` on Sep 19, 2026: about 115 kB of gzipped JS and about 8 kB of gzipped CSS.
+- Reduced motion is respected through the `prefers-reduced-motion` media query; the sphere pauses when its tab is hidden.
+- No Lighthouse or accessibility audit has been run yet; nothing here claims one.
 
 ---
 
