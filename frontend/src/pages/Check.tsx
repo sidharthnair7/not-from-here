@@ -19,6 +19,7 @@ export const Check: React.FC = () => {
     phase,
     result,
     live,
+    ledgerLive,
     proposers,
     selectScenario,
     setCoordinates,
@@ -28,6 +29,8 @@ export const Check: React.FC = () => {
   } = useStore();
 
   const [searchParams] = useSearchParams();
+  // the backend is there if the ledger answered on load or the last check was live
+  const backendUp = live || ledgerLive;
   // a refusal at rule 1 or 2 never reached the range lookup; the radar must not show "0" for it
   const failedAt = result?.evidence?.rule ?? null;
   const rangeRan = failedAt === null || failedAt >= 3;
@@ -224,7 +227,7 @@ export const Check: React.FC = () => {
             </p>
 
             <p className="demo-note">
-              {live
+              {backendUp
                 ? 'Live: photos go to the backend for one check and are not stored; only a hash of the photo and the rounded location go into the record.'
                 : 'Demo mode: the demo photos show results captured from the full system. A photo of your own is not sent anywhere and is not analysed here.'}
             </p>
@@ -345,8 +348,9 @@ export const Check: React.FC = () => {
 
       <footer>
         <div className="wrap">
-          Sample data shown. Live mode reads iNaturalist and the Invasive Species Centre through the
-          Spring Boot API.
+          {backendUp
+            ? 'Live: every verdict is decided from iNaturalist and GBIF at the moment you check, and the query links are in the evidence.'
+            : 'Sample data shown. Live mode reads iNaturalist and GBIF through the Spring Boot API.'}
         </div>
       </footer>
     </>
