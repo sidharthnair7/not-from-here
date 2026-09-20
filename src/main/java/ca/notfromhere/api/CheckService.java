@@ -235,9 +235,11 @@ public class CheckService {
             note = "Nothing was recognised in this photo. The proposer on this server covers " + scopes + ".";
         }
 
+        String hotline = ev.get("hotline") instanceof String h ? h : null;
+
         return new CheckResponse(verdict.name(), ruleLabel, reason, proposals, trace, nearest, hist, month,
                 evidence, reportText, sightingId, alreadyReported, duplicateOf, sources, integrity, agreement, howToTell,
-                note);
+                note, hotline);
     }
 
     @SuppressWarnings("unchecked")

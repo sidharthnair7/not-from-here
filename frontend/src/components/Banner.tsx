@@ -42,6 +42,18 @@ export const Banner: React.FC = () => {
             {result.note}
           </p>
         )}
+        {result.hotline && (
+          <div className="actions">
+            <a
+              className="btn sm"
+              style={{ textDecoration: 'none', display: 'inline-block' }}
+              href={'tel:' + result.hotline.replace(/[^0-9]/g, '')}
+              data-testid="hotline"
+            >
+              Call the Invading Species Hotline: {result.hotline}
+            </a>
+          </div>
+        )}
         {result.agreement && result.agreement.views > 1 && (
           <p className="rule" data-testid="agreement">
             {result.agreement.agreeing} of {result.agreement.views} views agree

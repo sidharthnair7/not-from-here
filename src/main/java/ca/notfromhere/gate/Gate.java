@@ -149,7 +149,7 @@ public class Gate {
         if (within200 == 0) {
             rangeEvidence.put("hotline", speciesList.hotline());
             return refuse(Verdict.NEW_RANGE, "range",
-                    "No research-grade record of " + species.commonName() + " within 200 km in the last 3 years. Not auto-reported; call the Invading Species Hotline.",
+                    "No research-grade record of " + species.commonName() + " within 200 km in the last 3 years. Not auto-reported; call the Invading Species Hotline, " + speciesList.hotline() + ".",
                     rangeEvidence);
         }
         if (within50 < MIN_RECORDS_WITHIN_50_KM) {

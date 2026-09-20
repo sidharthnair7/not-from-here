@@ -87,6 +87,8 @@ export interface CheckResult {
   how_to_tell?: HowToTell | null;
   /** Set only when nothing was recognised: what the proposer on this server can name. */
   note?: string | null;
+  /** Set only on a NEW_RANGE refusal: the Invading Species Hotline number. */
+  hotline?: string | null;
 }
 
 export interface MkResultOptions {

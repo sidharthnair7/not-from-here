@@ -27,7 +27,9 @@ public record CheckResponse(
         AgreementOut agreement,
         ca.notfromhere.species.Species.Guide how_to_tell,
         /** Set only when no proposer named anything: says what this server's proposers can name. */
-        String note) {
+        String note,
+        /** Set only on a NEW_RANGE refusal: the Invading Species Hotline number to call. */
+        String hotline) {
 
     public record CandidateOut(String taxonName, String common, double confidence) {
     }
