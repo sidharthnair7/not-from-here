@@ -125,10 +125,9 @@ export const PhotoFrame: React.FC = () => {
   }, [processFile, showToast, t]);
 
   const handleClick = () => {
-    if (!upload && !scn) {
-      fileInputRef.current?.click();
-    }
+    fileInputRef.current?.click();
   };
+
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -142,7 +141,10 @@ export const PhotoFrame: React.FC = () => {
     setIsOver(true);
   };
 
-  const handleDragLeave = () => {
+  const handleDragLeave = (e: React.DragEvent) => {
+    // dragleave also fires when the cursor moves onto a child of the frame; ignore those or the overlay flickers
+    const next = e.relatedTarget as Node | null;
+    if (next && e.currentTarget.contains(next)) return;
     setIsOver(false);
   };
 
@@ -164,6 +166,25 @@ export const PhotoFrame: React.FC = () => {
     },
     [processFile, addUploadView, showToast]
   );
+
+  // A file dropped anywhere on the page must never open in a new tab: catch it at the window and treat it as an upload
+  useEffect(() => {
+    const swallow = (e: DragEvent) => {
+      e.preventDefault();
+    };
+    const dropAnywhere = (e: DragEvent) => {
+      e.preventDefault();
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        processFiles(e.dataTransfer.files);
+      }
+    };
+    window.addEventListener('dragover', swallow);
+    window.addEventListener('drop', dropAnywhere);
+    return () => {
+      window.removeEventListener('dragover', swallow);
+      window.removeEventListener('drop', dropAnywhere);
+    };
+  }, [processFiles]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();

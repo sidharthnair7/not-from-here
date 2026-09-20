@@ -28,6 +28,27 @@ export const Check: React.FC = () => {
 
   const [searchParams] = useSearchParams();
   const rightColRef = useRef<HTMLDivElement | null>(null);
+  const leftColRef = useRef<HTMLDivElement | null>(null);
+
+  // The sighting card is sticky. If it is taller than the window, stick it by its bottom instead of its top so the
+  // Check button is always visible and the card never needs its own scrollbar.
+  useEffect(() => {
+    const el = leftColRef.current;
+    if (!el) return;
+    const place = () => {
+      const header = 80;
+      const overflow = el.offsetHeight + header + 16 - window.innerHeight;
+      el.style.top = overflow > 0 ? `${header - overflow}px` : `${header}px`;
+    };
+    place();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(place) : null;
+    ro?.observe(el);
+    window.addEventListener('resize', place);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('resize', place);
+    };
+  }, []);
   const { t } = useTranslation();
 
   // Support ?scn=... deep-linking
@@ -127,7 +148,7 @@ export const Check: React.FC = () => {
         </section>
 
         <div className="grid">
-          <div className="card" id="left">
+          <div className="card" id="left" ref={leftColRef}>
             <h2>Your sighting</h2>
             <p className="sub">Drop a photo, or try one of the demo photos.</p>
 
@@ -173,7 +194,13 @@ export const Check: React.FC = () => {
             </div>
 
             {/* Proximity Radar Map */}
-            <RadarMiniMap lat={lat} lng={lng} />
+            <RadarMiniMap
+              lat={lat}
+              lng={lng}
+              nearest={result?.nearest}
+              count50={result?.evidence?.range?.count_50km ?? null}
+              count200={result?.evidence?.range?.count_200km ?? null}
+            />
 
             <button
               className="btn"

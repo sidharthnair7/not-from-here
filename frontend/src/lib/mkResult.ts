@@ -21,6 +21,8 @@ export interface NearestRecord {
   distance_km: number;
   place: string;
   url: string | null;
+  lat?: number;
+  lng?: number;
 }
 
 export interface Evidence {

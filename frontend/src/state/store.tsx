@@ -283,7 +283,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         // the backend wrote it to the shared ledger; re-read the ledger so the sphere shows the real record
         setNewId('api' + data.sighting_id);
         await refreshLedger();
-      } else if (data.verdict === 'REPORT') {
+      } else if (data.verdict === 'REPORT' && !ledgerLive) {
+        // demo-mode result: keep it in the browser's own record (never when the shared ledger is live)
         const id = 'n' + Date.now();
         setNewId(id);
         const newSighting: Sighting = {
@@ -297,7 +298,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           fresh: true
         };
         setSightings((prev) => [newSighting, ...prev]);
-      } else {
+      } else if (data.verdict !== 'REPORT' && (isLive || !ledgerLive)) {
         const newRefusal: Refusal = {
           id: 'r' + Date.now(),
           key: s.key,
@@ -309,7 +310,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setRefusals((prev) => [newRefusal, ...prev]);
       }
     },
-    [phase, scn, uploadFile, uploadFiles, uploadGps, lat, lng, refreshLedger]
+    [phase, scn, uploadFile, uploadFiles, uploadGps, lat, lng, refreshLedger, ledgerLive]
   );
 
   return (
