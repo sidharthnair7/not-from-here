@@ -69,7 +69,7 @@ public class INatClient implements RangeLookup {
                 distance = haversineKm(lat, lng, Double.parseDouble(parts[0]), Double.parseDouble(parts[1]));
             }
             nearest.add(new Observation(o.path("id").asLong(), o.path("observed_on").asText(""),
-                    Math.round(distance * 10) / 10.0, o.path("uri").asText("")));
+                    Math.round(distance * 10) / 10.0, o.path("place_guess").asText(""), o.path("uri").asText("")));
         }
         nearest.sort((a, b) -> Double.compare(a.distanceKm(), b.distanceKm()));
         if (nearest.size() > NEAREST_TO_KEEP) nearest = nearest.subList(0, NEAREST_TO_KEEP);

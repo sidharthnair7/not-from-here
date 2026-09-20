@@ -3,7 +3,7 @@
   "hotline": "1-800-563-7711",
   "hotlineSource": "https://www.invadingspecies.com/programs/invading-species-reporting/",
   "species": [
-    {"commonName": "Common reed (Phragmites)", "scientificName": "Phragmites australis", "taxonId": 64237, "kind": "plant", "lookalike": "Native Phragmites australis subsp. americanus"},
+    {"commonName": "Common reed (Phragmites)", "scientificName": "Phragmites australis", "taxonId": 64237, "kind": "plant", "lookalike": "Broadleaf cattail (Typha latifolia)"},
     {"commonName": "Japanese knotweed", "scientificName": "Reynoutria japonica", "taxonId": 914922, "kind": "plant", "lookalike": null},
     {"commonName": "Garlic mustard", "scientificName": "Alliaria petiolata", "taxonId": 56061, "kind": "plant", "lookalike": null},
     {"commonName": "Wild parsnip", "scientificName": "Pastinaca sativa", "taxonId": 59778, "kind": "plant", "lookalike": "Golden alexanders (Zizia aurea)"},

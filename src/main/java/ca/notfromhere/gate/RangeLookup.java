@@ -10,7 +10,7 @@ import java.util.Map;
 public interface RangeLookup {
 
     /** One research-grade observation near the photo, in the form the UI shows as evidence. */
-    record Observation(long id, String observedOn, double distanceKm, String url) {
+    record Observation(long id, String observedOn, double distanceKm, String place, String url) {
     }
 
     /** Research-grade observations of the taxon around (lat, lng) in the last three years. */

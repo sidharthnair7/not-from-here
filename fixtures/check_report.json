@@ -1,71 +1,208 @@
 {
-  "verdict": "REPORT",
-  "rule": "all",
-  "reason": "Common reed (Phragmites) (Phragmites australis): proposers agree, on the Ontario list, 218 records within 50 km, in season.",
-  "proposals": [
-    [
-      {
-        "taxonName": "Phragmites australis",
-        "taxonId": 64237,
-        "confidence": 0.91,
-        "source": "ollama:qwen3.5:9b"
-      },
-      {
-        "taxonName": "Typha latifolia",
-        "taxonId": 0,
-        "confidence": 0.05,
-        "source": "ollama:qwen3.5:9b"
-      }
-    ]
-  ],
-  "evidence": {
-    "species": {
-      "commonName": "Common reed (Phragmites)",
-      "scientificName": "Phragmites australis",
-      "taxonId": 64237,
-      "kind": "plant",
-      "lookalike": "Native Phragmites australis subsp. americanus"
-    },
-    "within50Km": 218,
-    "within200Km": 1412,
-    "nearest": [
-      {
-        "id": 401358622,
-        "observedOn": "2026-09-18",
-        "distanceKm": 6.7,
-        "url": "https://www.inaturalist.org/observations/401358622"
-      }
+    "verdict": "REPORT",
+    "rule": "All four rules passed",
+    "reason": "Garlic mustard (Alliaria petiolata): proposers agree, on the Ontario list, 409 records within 50 km, in season.",
+    "proposals": [
+        {
+            "source": "ollama:qwen3.5:9b",
+            "list": [
+                {
+                    "taxonName": "Alliaria petiolata",
+                    "common": "Garlic mustard",
+                    "confidence": 0.95
+                },
+                {
+                    "taxonName": "Other",
+                    "common": null,
+                    "confidence": 0.05
+                }
+            ]
+        }
     ],
-    "month": 9,
-    "histogram": {
-      "1": 380,
-      "2": 503,
-      "3": 583,
-      "4": 891,
-      "5": 828,
-      "6": 1002,
-      "7": 1655,
-      "8": 2264,
-      "9": 1622,
-      "10": 917,
-      "11": 1030,
-      "12": 375
+    "trace": [
+        "Single proposer: Alliaria petiolata 0.95 vs Other 0.05",
+        "Alliaria petiolata is on the Ontario list",
+        "409 research-grade records within 50 km, last 3 years. Nearest 1.5 km",
+        "September: 408 Ontario records"
+    ],
+    "nearest": [
+        {
+            "date": "2026-07-04",
+            "distance_km": 1.5,
+            "place": "Park St N, Peterborough, ON, CA",
+            "url": "https://www.inaturalist.org/observations/378184590"
+        },
+        {
+            "date": "2026-05-24",
+            "distance_km": 1.5,
+            "place": "Sutherland Pl, Peterborough, ON, CA",
+            "url": "https://www.inaturalist.org/observations/364884007"
+        },
+        {
+            "date": "2026-05-29",
+            "distance_km": 1.6,
+            "place": "Marsdale at Ashburnham, Peterborough, ON K9L 1Y4, Canada",
+            "url": "https://www.inaturalist.org/observations/366600280"
+        },
+        {
+            "date": "2026-05-25",
+            "distance_km": 1.6,
+            "place": "Peterborough, ON, Canada",
+            "url": "https://www.inaturalist.org/observations/365206456"
+        },
+        {
+            "date": "2026-06-22",
+            "distance_km": 1.7,
+            "place": "Beavermead Park, Peterborough, ON, CA",
+            "url": "https://www.inaturalist.org/observations/374486412"
+        }
+    ],
+    "hist": [
+        115,
+        67,
+        443,
+        3295,
+        8149,
+        2430,
+        1083,
+        504,
+        408,
+        425,
+        275,
+        125
+    ],
+    "histMonth": 9,
+    "evidence": {
+        "rule": null,
+        "taxon": {
+            "name": "Alliaria petiolata",
+            "list_member": true
+        },
+        "range": {
+            "radius_km": 50,
+            "window_years": 3,
+            "count_50km": 409,
+            "count_200km": 6103
+        },
+        "season": {
+            "month": 9,
+            "histogram": [
+                115,
+                67,
+                443,
+                3295,
+                8149,
+                2430,
+                1083,
+                504,
+                408,
+                425,
+                275,
+                125
+            ]
+        },
+        "proposals": [
+            {
+                "source": "ollama:qwen3.5:9b",
+                "list": [
+                    {
+                        "taxonName": "Alliaria petiolata",
+                        "common": "Garlic mustard",
+                        "confidence": 0.95
+                    },
+                    {
+                        "taxonName": "Other",
+                        "common": null,
+                        "confidence": 0.05
+                    }
+                ]
+            }
+        ],
+        "raw": {
+            "species": {
+                "commonName": "Garlic mustard",
+                "scientificName": "Alliaria petiolata",
+                "taxonId": 56061,
+                "kind": "plant",
+                "lookalike": null
+            },
+            "within50Km": 409,
+            "within200Km": 6103,
+            "nearest": [
+                {
+                    "id": 378184590,
+                    "observedOn": "2026-07-04",
+                    "distanceKm": 1.5,
+                    "place": "Park St N, Peterborough, ON, CA",
+                    "url": "https://www.inaturalist.org/observations/378184590"
+                },
+                {
+                    "id": 364884007,
+                    "observedOn": "2026-05-24",
+                    "distanceKm": 1.5,
+                    "place": "Sutherland Pl, Peterborough, ON, CA",
+                    "url": "https://www.inaturalist.org/observations/364884007"
+                },
+                {
+                    "id": 366600280,
+                    "observedOn": "2026-05-29",
+                    "distanceKm": 1.6,
+                    "place": "Marsdale at Ashburnham, Peterborough, ON K9L 1Y4, Canada",
+                    "url": "https://www.inaturalist.org/observations/366600280"
+                },
+                {
+                    "id": 365206456,
+                    "observedOn": "2026-05-25",
+                    "distanceKm": 1.6,
+                    "place": "Peterborough, ON, Canada",
+                    "url": "https://www.inaturalist.org/observations/365206456"
+                },
+                {
+                    "id": 374486412,
+                    "observedOn": "2026-06-22",
+                    "distanceKm": 1.7,
+                    "place": "Beavermead Park, Peterborough, ON, CA",
+                    "url": "https://www.inaturalist.org/observations/374486412"
+                }
+            ],
+            "proposals": [
+                [
+                    {
+                        "taxonName": "Alliaria petiolata",
+                        "taxonId": 56061,
+                        "confidence": 0.95,
+                        "source": "ollama:qwen3.5:9b"
+                    },
+                    {
+                        "taxonName": "Other",
+                        "taxonId": 0,
+                        "confidence": 0.05,
+                        "source": "ollama:qwen3.5:9b"
+                    }
+                ]
+            ],
+            "month": 9,
+            "histogram": {
+                "1": 115,
+                "2": 67,
+                "3": 443,
+                "4": 3295,
+                "5": 8149,
+                "6": 2430,
+                "7": 1083,
+                "8": 504,
+                "9": 408,
+                "10": 425,
+                "11": 275,
+                "12": 125
+            },
+            "seasonDataAvailable": true,
+            "photo": {
+                "lat": 44.3,
+                "lng": -78.32,
+                "takenAt": "2026-09-19"
+            }
+        }
     },
-    "seasonDataAvailable": true,
-    "photo": {
-      "lat": 44.3,
-      "lng": -78.32,
-      "takenAt": "2026-09-19"
-    }
-  },
-  "nearest": [
-    {
-      "id": 401358622,
-      "observedOn": "2026-09-18",
-      "distanceKm": 6.7,
-      "url": "https://www.inaturalist.org/observations/401358622"
-    }
-  ],
-  "report_text": "Sighting of common reed (Phragmites australis) near 44.30, -78.32 on 2026-09-19. Two proposers agreed. iNaturalist holds 218 research-grade records within 50 km in the last three years, the nearest 6.7 km away on 2026-09-18. September is within the species' recorded season in Ontario.",
-  "sighting_id": 1
+    "report_text": "Suspected invasive species report\n\nSpecies: Alliaria petiolata (Garlic mustard)\nObserved: 2026-09-19 at 44.300, -78.320\nIdentification: one proposer, 0.95 confidence, at least 2x its runner-up.\nListed as invasive in Ontario.\nNearby records: 409 research-grade iNaturalist observations within 50 km in the last 3 years; nearest 1.5 km (2026-07-04).\nSeason: recorded in Ontario in September.\n\nDrafted from the gate's evidence only. Please check before sending."
 }

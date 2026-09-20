@@ -15,17 +15,38 @@ Built for NextStep Hacks 2026 ("Earth Forward"), September 19 to 20, 2026.
 | 3 | Range | At least 3 research-grade iNaturalist records within 50 km in the last 3 years | `INSUFFICIENT_RECORDS`; zero within 200 km is `NEW_RANGE`, routed to the Invading Species Hotline |
 | 4 | Season | The photo's month has a non-zero count in the Ontario month histogram | `OUT_OF_SEASON` |
 
+## The kill check (why the proposer picks from a catalogue)
+
+Before writing the proposer we tested the local model on ten research-grade iNaturalist photos, one per species (`src/test/resources/photos/`, licences in `expected.json`).
+
+| Prompt | Top-1 correct | Also clears the 2x confidence rule |
+|--------|---------------|-------------------------------------|
+| Open-ended "name the species" | 2 / 10 | |
+| Closed catalogue: 16 invasives + 9 native lookalikes + Other | 6 / 10 | 5 / 10 |
+
+Deterministic (temperature 0, fixed seed); every photo gives the same answer on every run. The four misses are the point of the app: wild parsnip was called golden alexanders, giant hogweed was called cow parsnip (both are the native lookalikes on our list), and dog-strangling vine and zebra mussel came back as "Other". In every one of those cases the gate refuses instead of reporting. Re-run it yourself: `mvn test -Dgroups=live -DexcludedGroups=` (needs Ollama).
+
 ## Stack
 
 - Backend: Java 25, Spring Boot 4.1, Maven, H2 file database. iNaturalist public API (no key) with a disk cache in `cache/` so the demo works offline.
-- Proposer: a local vision model through Ollama (`qwen3.5:9b`) by default; `LLM_PROVIDER=bedrock` switches to Amazon Nova 2 Lite.
+- Proposer: a local vision model through Ollama (`qwen3.5:9b`, JSON mode, catalogue prompt) by default; `LLM_PROVIDER` selects the implementation.
 - Frontend: React + Vite, in `frontend/`.
 
 ## Run
 
+Backend (needs Ollama running with `qwen3.5:9b`):
+
 ```bash
 mvn spring-boot:run
 ```
+
+Frontend, in a second terminal (Vite proxies `/api` to port 8080):
+
+```bash
+cd frontend && npm install && npm run dev
+```
+
+`POST /api/check` takes multipart `photo`, optional `lat`, `lng`, `taken_at`. Every response carries the gate's raw evidence.
 
 Tests (no network, no model):
 
@@ -37,12 +58,16 @@ mvn test
 
 ```
 src/main/java/ca/notfromhere/
+  api/       CheckController (POST /api/check, GET /api/health, GET /api/species), CheckService, CheckResponse
   gate/      Gate.java (the four rules), Verdict, Proposal, PhotoMeta, GateResult, RangeLookup
+  proposer/  Proposer, Catalogue, OllamaProposer
   species/   Species, SpeciesList (loads ontario_invasives.json)
   inat/      INatClient (iNaturalist calls + disk cache; implements RangeLookup)
 src/main/resources/ontario_invasives.json
-src/test/java/ca/notfromhere/gate/GateTest.java
-fixtures/   example API responses so the UI can be built before the backend is finished
+src/test/java/ca/notfromhere/gate/GateTest.java            11 unit tests, no network
+src/test/java/ca/notfromhere/proposer/ProposerLiveTest.java the kill check, tagged live
+src/test/resources/photos/                                  10 test photos + expected.json
+fixtures/   real responses captured from /api/check (report, split, insufficient, new range)
 frontend/   Vite app
 ```
 

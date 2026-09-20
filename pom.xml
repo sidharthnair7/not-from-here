@@ -28,6 +28,7 @@
     </scm>
     <properties>
         <java.version>25</java.version>
+        <excludedGroups>live</excludedGroups>
     </properties>
     <dependencies>
         <dependency>
@@ -72,6 +73,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!-- Tests tagged "live" need Ollama and the network; run them on demand with: mvn test -Dgroups=live -DexcludedGroups= -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludedGroups>${excludedGroups}</excludedGroups>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

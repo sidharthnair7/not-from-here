@@ -1,7 +1,7 @@
 {
-    "verdict": "NEW_RANGE",
+    "verdict": "INSUFFICIENT_RECORDS",
     "rule": "Decided by rule 3: range check",
-    "reason": "No research-grade record of Spotted lanternfly within 200 km in the last 3 years. Not auto-reported; call the Invading Species Hotline.",
+    "reason": "Only 0 research-grade record(s) within 50 km; the gate needs 3.",
     "proposals": [
         {
             "source": "ollama:qwen3.5:9b",
@@ -22,7 +22,7 @@
     "trace": [
         "Single proposer: Lycorma delicatula 0.95 vs Other 0.05",
         "Lycorma delicatula is on the Ontario list",
-        "No research-grade record of Spotted lanternfly within 200 km in the last 3 years. Not auto-reported; call the Invading Species Hotline.",
+        "Only 0 research-grade record(s) within 50 km; the gate needs 3.",
         null
     ],
     "nearest": [],
@@ -51,7 +51,7 @@
             "radius_km": 50,
             "window_years": 3,
             "count_50km": 0,
-            "count_200km": 0
+            "count_200km": 39
         },
         "season": {
             "month": 9,
@@ -96,9 +96,8 @@
                 "lookalike": null
             },
             "within50Km": 0,
-            "within200Km": 0,
-            "nearest": [],
-            "hotline": "1-800-563-7711"
+            "within200Km": 39,
+            "nearest": []
         }
     },
     "report_text": null

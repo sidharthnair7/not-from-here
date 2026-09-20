@@ -1,44 +1,126 @@
 {
-  "verdict": "NOT_VERIFIED_SPLIT",
-  "rule": "agreement",
-  "reason": "The proposers disagree on the species: \"Heracleum mantegazzianum\" vs \"Heracleum maximum\".",
-  "proposals": [
-    [
-      {
-        "taxonName": "Heracleum mantegazzianum",
-        "taxonId": 130228,
-        "confidence": 0.62,
-        "source": "ollama:qwen3.5:9b"
-      }
-    ],
-    [
-      {
-        "taxonName": "Heracleum maximum",
-        "taxonId": 0,
-        "confidence": 0.71,
-        "source": "bedrock:nova-2-lite"
-      }
-    ]
-  ],
-  "evidence": {
+    "verdict": "NOT_VERIFIED_SPLIT",
+    "rule": "Decided by rule 1: proposal agreement",
+    "reason": "Single proposer is not confident enough: 0.90 for \"Phragmites australis\" vs 0.60 for \"Typha latifolia\" (needs 2x).",
     "proposals": [
-      [
         {
-          "taxonName": "Heracleum mantegazzianum",
-          "taxonId": 130228,
-          "confidence": 0.62,
-          "source": "ollama:qwen3.5:9b"
+            "source": "ollama:qwen3.5:9b",
+            "list": [
+                {
+                    "taxonName": "Phragmites australis",
+                    "common": "Common reed (Phragmites)",
+                    "confidence": 0.9
+                },
+                {
+                    "taxonName": "Typha latifolia",
+                    "common": null,
+                    "confidence": 0.6
+                },
+                {
+                    "taxonName": "Other",
+                    "common": null,
+                    "confidence": 0.3
+                }
+            ]
         }
-      ],
-      [
-        {
-          "taxonName": "Heracleum maximum",
-          "taxonId": 0,
-          "confidence": 0.71,
-          "source": "bedrock:nova-2-lite"
+    ],
+    "trace": [
+        "Single proposer is not confident enough: 0.90 for \"Phragmites australis\" vs 0.60 for \"Typha latifolia\" (needs 2x).",
+        null,
+        null,
+        null
+    ],
+    "nearest": [],
+    "hist": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "histMonth": 9,
+    "evidence": {
+        "rule": 1,
+        "taxon": {
+            "name": "Phragmites australis",
+            "list_member": true
+        },
+        "range": {
+            "radius_km": 50,
+            "window_years": 3,
+            "count_50km": 0,
+            "count_200km": 0
+        },
+        "season": {
+            "month": 9,
+            "histogram": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "proposals": [
+            {
+                "source": "ollama:qwen3.5:9b",
+                "list": [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "common": "Common reed (Phragmites)",
+                        "confidence": 0.9
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "common": null,
+                        "confidence": 0.6
+                    },
+                    {
+                        "taxonName": "Other",
+                        "common": null,
+                        "confidence": 0.3
+                    }
+                ]
+            }
+        ],
+        "raw": {
+            "proposals": [
+                [
+                    {
+                        "taxonName": "Phragmites australis",
+                        "taxonId": 64237,
+                        "confidence": 0.9,
+                        "source": "ollama:qwen3.5:9b"
+                    },
+                    {
+                        "taxonName": "Typha latifolia",
+                        "taxonId": 0,
+                        "confidence": 0.6,
+                        "source": "ollama:qwen3.5:9b"
+                    },
+                    {
+                        "taxonName": "Other",
+                        "taxonId": 0,
+                        "confidence": 0.3,
+                        "source": "ollama:qwen3.5:9b"
+                    }
+                ]
+            ]
         }
-      ]
-    ]
-  },
-  "nearest": []
+    },
+    "report_text": null
 }

@@ -1,0 +1,85 @@
+{
+  "note": "One research-grade iNaturalist photo per species, Ontario, fetched 2026-09-19 for the proposer kill check. Licenses and attribution per photo.",
+  "photos": [
+    {
+      "file": "phragmites.jpg",
+      "taxonId": 64237,
+      "scientificName": "Phragmites australis",
+      "observation": "https://www.inaturalist.org/observations/141454532",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) Patrick Kramer, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "knotweed.jpg",
+      "taxonId": 914922,
+      "scientificName": "Reynoutria japonica",
+      "observation": "https://www.inaturalist.org/observations/160153086",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) leeanardo, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "garlic_mustard.jpg",
+      "taxonId": 56061,
+      "scientificName": "Alliaria petiolata",
+      "observation": "https://www.inaturalist.org/observations/25589816",
+      "photoLicense": "cc-by",
+      "attribution": "(c) Quinten Wiegersma, some rights reserved (CC BY)"
+    },
+    {
+      "file": "wild_parsnip.jpg",
+      "taxonId": 59778,
+      "scientificName": "Pastinaca sativa",
+      "observation": "https://www.inaturalist.org/observations/91918710",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) ratfink, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "dsv.jpg",
+      "taxonId": 632667,
+      "scientificName": "Vincetoxicum rossicum",
+      "observation": "https://www.inaturalist.org/observations/40066897",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) Owen Clarkin, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eab.jpg",
+      "taxonId": 70057,
+      "scientificName": "Agrilus planipennis",
+      "observation": "https://www.inaturalist.org/observations/296385358",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) Kurt Hennige, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "lanternfly.jpg",
+      "taxonId": 324726,
+      "scientificName": "Lycorma delicatula",
+      "observation": "https://www.inaturalist.org/observations/180918319",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) slfredeb, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "zebra_mussel.jpg",
+      "taxonId": 116340,
+      "scientificName": "Dreissena polymorpha",
+      "observation": "https://www.inaturalist.org/observations/291891281",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) KF, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "giant_hogweed.jpg",
+      "taxonId": 130228,
+      "scientificName": "Heracleum mantegazzianum",
+      "observation": "https://www.inaturalist.org/observations/122412630",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) Marshacee, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "purple_loosestrife.jpg",
+      "taxonId": 61321,
+      "scientificName": "Lythrum salicaria",
+      "observation": "https://www.inaturalist.org/observations/91033897",
+      "photoLicense": "cc-by-nc",
+      "attribution": "(c) Caroline Heise, some rights reserved (CC BY-NC)"
+    }
+  ]
+}

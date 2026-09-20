@@ -34,7 +34,7 @@ class GateTest {
         @Override
         public RangeResult range(long taxonId, double lat, double lng) {
             List<Observation> nearest = within200 == 0 ? List.of()
-                    : List.of(new Observation(401358622L, "2026-09-18", 6.7, "https://www.inaturalist.org/observations/401358622"));
+                    : List.of(new Observation(401358622L, "2026-09-18", 6.7, "Cavan Monaghan, ON", "https://www.inaturalist.org/observations/401358622"));
             return new RangeResult(within50, within200, nearest);
         }
 
